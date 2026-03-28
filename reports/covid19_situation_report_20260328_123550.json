@@ -1,0 +1,91 @@
+{
+  "metadata": {
+    "report_date": "2026-03-28 12:35",
+    "period_start": "2026-03-22",
+    "period_end": "2026-03-28",
+    "days_analyzed": 7,
+    "generated_by": "COVID-19 Situation Report Generator v1.0"
+  },
+  "summary": {
+    "total_new_cases": 9335,
+    "total_new_deaths": 164,
+    "total_new_recoveries": 8157,
+    "total_tests": 337500
+  },
+  "statistics": {
+    "avg_daily_cases": 1333.5714285714287,
+    "median_daily_cases": 1371,
+    "std_dev_cases": 250.9281817192967,
+    "avg_daily_deaths": 23.428571428571427,
+    "avg_positivity_rate": 2.9285714285714284
+  },
+  "trends": {
+    "case_trend": "decreasing",
+    "trend_percentage": -21.058707124010553,
+    "peak_day": "2026-03-23",
+    "peak_cases": 1737
+  },
+  "derived_metrics": {
+    "case_fatality_rate": 1.7568291376539904,
+    "recovery_rate": 87.38082485270488,
+    "tests_per_case": 36.154258168184256
+  },
+  "daily_data": [
+    {
+      "date": "2026-03-22",
+      "new_cases": 1371,
+      "new_deaths": 17,
+      "new_recoveries": 1371,
+      "tests_conducted": 50000,
+      "positivity_rate": 2.5
+    },
+    {
+      "date": "2026-03-23",
+      "new_cases": 1737,
+      "new_deaths": 32,
+      "new_recoveries": 1302,
+      "tests_conducted": 47500,
+      "positivity_rate": 3.5
+    },
+    {
+      "date": "2026-03-24",
+      "new_cases": 1440,
+      "new_deaths": 17,
+      "new_recoveries": 1234,
+      "tests_conducted": 45000,
+      "positivity_rate": 3.0
+    },
+    {
+      "date": "2026-03-25",
+      "new_cases": 1165,
+      "new_deaths": 32,
+      "new_recoveries": 1165,
+      "tests_conducted": 52500,
+      "positivity_rate": 2.5
+    },
+    {
+      "date": "2026-03-26",
+      "new_cases": 1462,
+      "new_deaths": 17,
+      "new_recoveries": 1097,
+      "tests_conducted": 50000,
+      "positivity_rate": 3.5
+    },
+    {
+      "date": "2026-03-27",
+      "new_cases": 1200,
+      "new_deaths": 32,
+      "new_recoveries": 1028,
+      "tests_conducted": 47500,
+      "positivity_rate": 3.0
+    },
+    {
+      "date": "2026-03-28",
+      "new_cases": 960,
+      "new_deaths": 17,
+      "new_recoveries": 960,
+      "tests_conducted": 45000,
+      "positivity_rate": 2.5
+    }
+  ]
+}
