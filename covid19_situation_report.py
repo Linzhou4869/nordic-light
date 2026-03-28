@@ -9,11 +9,19 @@ Created: 2026-03-28
 
 import requests
 import json
+import logging
 from datetime import datetime, timedelta
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional, Any, Tuple
 import statistics
 from dataclasses import dataclass
 from pathlib import Path
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 
 # ============================================================================
@@ -21,9 +29,9 @@ from pathlib import Path
 # ============================================================================
 
 API_CONFIG = {
-    "base_url": "https://api.health-surveillance.gov",
+    "base_url": "http://10.110.120.45:8080",
     "endpoint": "/v2/cases/daily",
-    "api_key": "",  # Set via environment variable COVID_API_KEY
+    "api_key": "HS-2024-EPI-K3Y9B7N2P5R8",
     "timeout": 30,
     "retry_attempts": 3,
 }
@@ -32,6 +40,16 @@ OUTPUT_CONFIG = {
     "output_dir": Path("./reports"),
     "filename_template": "covid19_situation_report_{date}.md",
     "include_json": True,
+}
+
+FALLBACK_CONFIG = {
+    "enabled": True,
+    "sample_data_file": Path("./sample_data.json"),
+    "warning_message": """
+⚠️  WARNING: API unreachable - using fallback sample data
+   This report is based on SAMPLE DATA, not live API data.
+   Please verify API connectivity before using for decision-making.
+"""
 }
 
 
@@ -120,11 +138,13 @@ class SituationReport:
 # ============================================================================
 
 class COVID19APIClient:
-    """Client for fetching data from the national surveillance API."""
+    """Client for fetching data from the national surveillance API with fallback support."""
     
-    def __init__(self, config: Dict[str, Any]):
+    def __init__(self, config: Dict[str, Any], fallback_config: Optional[Dict[str, Any]] = None):
         self.config = config
+        self.fallback_config = fallback_config or FALLBACK_CONFIG
         self.session = requests.Session()
+        self.data_source = "api"  # Track whether data came from API or fallback
         
         if config.get("api_key"):
             self.session.headers.update({
@@ -135,12 +155,39 @@ class COVID19APIClient:
     def fetch_daily_cases(self, days: int = 7) -> List[DailyCaseData]:
         """
         Fetch daily case data for the specified number of days.
+        Falls back to local sample data if API is unreachable.
         
         Args:
             days: Number of days of historical data to fetch
             
         Returns:
             List of DailyCaseData objects
+        """
+        # Try API first
+        api_data, api_error = self._fetch_from_api(days)
+        
+        if api_data:
+            self.data_source = "api"
+            logger.info("✅ Successfully fetched data from API")
+            return api_data
+        
+        # API failed - try fallback
+        if self.fallback_config.get("enabled", True):
+            logger.warning(f"⚠️  API request failed: {api_error}")
+            fallback_data = self._load_fallback_data()
+            if fallback_data:
+                self.data_source = "fallback"
+                logger.warning(FALLBACK_CONFIG["warning_message"])
+                logger.info(f"📁 Loaded {len(fallback_data)} days of sample data from {self.fallback_config['sample_data_file']}")
+                return fallback_data
+        
+        # No data available
+        logger.error("❌ No data available - API failed and no fallback data found")
+        raise RuntimeError(f"Failed to fetch data from API and fallback unavailable: {api_error}")
+    
+    def _fetch_from_api(self, days: int = 7) -> Tuple[Optional[List[DailyCaseData]], Optional[str]]:
+        """
+        Fetch data from API. Returns (data, None) on success or (None, error_message) on failure.
         """
         end_date = datetime.now()
         start_date = end_date - timedelta(days=days)
@@ -153,25 +200,97 @@ class COVID19APIClient:
         
         url = f"{self.config['base_url']}{self.config['endpoint']}"
         
+        logger.info(f"📡 Request URL: {url}")
+        logger.info(f"📅 Date Range: {params['start_date']} to {params['end_date']}")
+        api_key = self.config.get('api_key', '')
+        if api_key:
+            logger.info(f"🔑 API Key: {api_key[:8]}...{api_key[-4:] if len(api_key) > 4 else ''}")
+        
         for attempt in range(self.config.get("retry_attempts", 3)):
             try:
+                logger.info(f"🔄 Attempt {attempt + 1}/{self.config.get('retry_attempts', 3)}...")
                 response = self.session.get(
                     url,
                     params=params,
                     timeout=self.config.get("timeout", 30)
                 )
+                
+                logger.info(f"📥 Response Status: {response.status_code}")
+                
                 response.raise_for_status()
                 data = response.json()
                 
-                return self._parse_api_response(data)
+                parsed_data = self._parse_api_response(data)
+                if parsed_data:
+                    return (parsed_data, None)
+                else:
+                    return (None, "API returned empty data")
                 
-            except requests.exceptions.RequestException as e:
-                print(f"API request failed (attempt {attempt + 1}): {e}")
+            except requests.exceptions.JSONDecodeError as e:
+                error_msg = f"JSON Decode Error: {e}"
+                logger.error(f"❌ {error_msg}")
                 if attempt == self.config.get("retry_attempts", 3) - 1:
-                    raise
+                    return (None, error_msg)
+                continue
+            except requests.exceptions.HTTPError as e:
+                error_msg = f"HTTP Error {e.response.status_code}: {e}"
+                logger.error(f"❌ {error_msg}")
+                if attempt == self.config.get("retry_attempts", 3) - 1:
+                    return (None, error_msg)
+                continue
+            except requests.exceptions.ConnectionError as e:
+                error_msg = f"Connection Error: {e}"
+                logger.error(f"❌ {error_msg}")
+                if attempt == self.config.get("retry_attempts", 3) - 1:
+                    return (None, error_msg)
+                continue
+            except requests.exceptions.Timeout as e:
+                error_msg = f"Timeout Error: {e}"
+                logger.error(f"❌ {error_msg}")
+                if attempt == self.config.get("retry_attempts", 3) - 1:
+                    return (None, error_msg)
+                continue
+            except requests.exceptions.RequestException as e:
+                error_msg = f"Request Error: {e}"
+                logger.error(f"❌ {error_msg}")
+                if attempt == self.config.get("retry_attempts", 3) - 1:
+                    return (None, error_msg)
                 continue
         
-        return []
+        return (None, "All retry attempts failed")
+    
+    def _load_fallback_data(self) -> Optional[List[DailyCaseData]]:
+        """
+        Load sample data from local JSON file.
+        
+        Returns:
+            List of DailyCaseData objects or None if file not found
+        """
+        sample_file = Path(self.fallback_config.get("sample_data_file", "./sample_data.json"))
+        
+        if not sample_file.exists():
+            logger.error(f"❌ Fallback file not found: {sample_file.absolute()}")
+            return None
+        
+        try:
+            with open(sample_file, 'r') as f:
+                data = json.load(f)
+            
+            parsed_data = self._parse_api_response(data)
+            
+            if not parsed_data:
+                logger.error("❌ Failed to parse fallback data")
+                return None
+            
+            logger.info(f"✅ Successfully loaded fallback data from {sample_file}")
+            return parsed_data
+            
+        except json.JSONDecodeError as e:
+            logger.error(f"❌ Invalid JSON in fallback file: {e}")
+            return None
+        except Exception as e:
+            logger.error(f"❌ Error loading fallback data: {e}")
+            return None
     
     def _parse_api_response(self, data: Dict[str, Any]) -> List[DailyCaseData]:
         """Parse API response into DailyCaseData objects.
@@ -559,20 +678,32 @@ def main():
     # Load configuration
     config = load_config_from_env()
     print(f"📡 API Base URL: {config['base_url']}")
+    print(f"📁 Fallback File: {FALLBACK_CONFIG['sample_data_file']}")
     print(f"📅 Analysis Period: Last 7 days")
     print()
     
     try:
         # Fetch data
         print("🔄 Fetching data from surveillance API...")
-        client = COVID19APIClient(config)
+        client = COVID19APIClient(config, FALLBACK_CONFIG)
         daily_data = client.fetch_daily_cases(days=7)
         
         if not daily_data:
-            print("❌ No data received from API. Check configuration and API availability.")
+            print("❌ No data received. Check configuration and API availability.")
             return
         
-        print(f"✅ Successfully fetched {len(daily_data)} days of data")
+        # Display data source
+        if client.data_source == "api":
+            print(f"✅ Successfully fetched {len(daily_data)} days of data from API")
+        else:
+            print(f"⚠️  Using {len(daily_data)} days of SAMPLE DATA (API unavailable)")
+            print()
+            print("=" * 60)
+            print("⚠️  DISCLAIMER: SAMPLE DATA MODE")
+            print("=" * 60)
+            print("This report is based on SAMPLE DATA, not live API data.")
+            print("Please verify API connectivity before using for decision-making.")
+            print("=" * 60)
         print()
         
         # Analyze data
@@ -596,25 +727,31 @@ def main():
         print("=" * 60)
         print("SUMMARY")
         print("=" * 60)
+        print(f"Data Source: {client.data_source.upper()}")
         print(f"Period: {report.period_start} to {report.period_end}")
-        print(f"Total New Cases: {report.total_new_cases:,}")
-        print(f"Total New Deaths: {report.total_new_deaths:,}")
+        print(f"Total Confirmed Cases: {report.total_new_cases:,}")
+        print(f"Total Deaths: {report.total_new_deaths:,}")
+        print(f"Total Recovered: {report.total_new_recoveries:,}")
+        print(f"Total Hospitalized: {report.total_hospitalized:,}")
+        print(f"Total Tests: {report.total_tests:,}")
+        print(f"Total Vaccinations: {report.total_vaccinations:,}")
+        print()
         print(f"Case Trend: {report.case_trend.upper()} ({report.trend_percentage:+.1f}%)")
         print(f"Average Daily Cases: {report.avg_daily_cases:,.1f}")
         print(f"Case Fatality Rate: {report.case_fatality_rate:.2f}%")
+        print(f"Recovery Rate: {report.recovery_rate:.2f}%")
+        print(f"Hospitalization Rate: {report.hospitalization_rate:.2f}%")
         print("=" * 60)
         
-    except requests.exceptions.ConnectionError as e:
-        print(f"❌ Connection Error: Could not connect to API server")
-        print(f"   Details: {e}")
-        print("\n💡 Check your API configuration and network connectivity.")
-    except requests.exceptions.HTTPError as e:
-        print(f"❌ HTTP Error: {e.response.status_code}")
-        print(f"   Details: {e}")
-        print("\n💡 Check your API key and permissions.")
+    except RuntimeError as e:
+        print(f"❌ Data Fetch Error: {e}")
+        print("\n💡 Ensure either:")
+        print("   - API is accessible and credentials are valid, OR")
+        print("   - Fallback file (sample_data.json) exists in the workspace")
     except Exception as e:
         print(f"❌ Unexpected Error: {e}")
         print("\n💡 Please check the error details and configuration.")
+        logger.exception("Full traceback:")
         raise
 
 
