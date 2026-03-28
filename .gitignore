@@ -10,5 +10,6 @@ HEARTBEAT.md
 BOOTSTRAP.md
 AGENTS.md
 
-# Python scripts
+# Python scripts (except monitoring)
 *.py
+!currency_monitor.py
