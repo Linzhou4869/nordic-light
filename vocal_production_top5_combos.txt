@@ -1,0 +1,59 @@
+VOCAL PRODUCTION - TOP 5 COMBOS FOR MODERN POP VOCALS
+======================================================
+
+1. THE "RADIO READY" CHAIN
+--------------------------
+De-esser: threshold -18dB, 6-8kHz → smooth
+Parallel comp: 30% blend, 3ms attack/100ms release → punchy
+Pitch: medium speed, neutral formant → polished
+Plate: 1.2s decay, 20ms pre-delay → airy
+Multi-band: 2:1 ratio, 3kHz crossover → clear
+Result: Commercial polish, sits in any mix
+
+
+2. THE "INTIMATE CLOSE-MIC" CHAIN
+---------------------------------
+De-esser: threshold -22dB, 5-7kHz → controlled sibilance
+Parallel comp: 20% blend, 10ms attack/200ms release → present
+Pitch: slow speed, slight downward formant → modern
+Plate: 0.8s decay, 10ms pre-delay → spacious (subtle)
+Multi-band: 1.5:1 ratio, 2kHz crossover → balanced
+Result: Breath-forward, ASMR-adjacent pop
+
+
+3. THE "ARENA POP" CHAIN
+------------------------
+De-esser: threshold -15dB, 7-9kHz → smooth
+Parallel comp: 50% blend, 1ms attack/50ms release → punchy
+Pitch: fast speed, neutral formant → polished
+Plate: 2.0s decay, 40ms pre-delay → airy + spacious
+Multi-band: 3:1 ratio, 4kHz crossover → clear
+Result: Big, confident, fills large spaces
+
+
+4. THE "R&B SILKY" CHAIN
+------------------------
+De-esser: threshold -20dB, 6-8kHz → controlled sibilance
+Parallel comp: 25% blend, 5ms attack/150ms release → present
+Pitch: medium-slow, slight upward formant → modern
+Plate: 1.5s decay, 30ms pre-delay → airy
+Multi-band: 2:1 ratio, 2.5kHz crossover → balanced
+Result: Smooth runs, velvety texture
+
+
+5. THE "HYPERPOP EDGE" CHAIN
+----------------------------
+De-esser: threshold -12dB, 8-10kHz → smooth (aggressive)
+Parallel comp: 60% blend, 0.5ms attack/30ms release → punchy (extreme)
+Pitch: fast speed, +2 semitone formant → modern (processed)
+Plate: 0.5s decay, 5ms pre-delay → spacious (tight)
+Multi-band: 4:1 ratio, 5kHz crossover → clear (compressed)
+Result: In-your-face, digitally heightened
+
+
+QUICK SUMMARY
+=============
+Start with de-essing to tame harshness, layer parallel compression for body,
+add subtle pitch correction for polish, finish with plate reverb for space,
+and use multi-band compression to glue the mids together. The five chains
+above cover everything from intimate bedroom pop to arena anthems.

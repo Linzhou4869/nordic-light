@@ -1,0 +1,24 @@
+LINE-3-SAFETY-UPDATES REPOSITORY DETAILS
+========================================
+
+Repository Name: line-3-safety-updates
+Repository URL: https://github.com/Linzhou4869/line-3-safety-updates
+Visibility: Private
+Created: 2026-03-28
+
+PURPOSE
+-------
+Store corrected automation scripts for Packaging Line 3 safety systems
+following SOP-102 compliance incident (Report #992).
+
+RELATED FILES IN WORKSPACE
+--------------------------
+- sop102_compliance_summary.txt (compliance analysis and corrective actions)
+- line-3-safety-updates-repo.txt (this file - repository details)
+
+NEXT STEPS
+----------
+1. Clone repository: git clone https://github.com/Linzhou4869/line-3-safety-updates.git
+2. Add corrected sensor calibration scripts
+3. Commit and push changes
+4. Document recalibration procedures

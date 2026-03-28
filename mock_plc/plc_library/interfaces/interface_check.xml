@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<InterfaceDefinitions>
+    <FB Name="torque_monitoring" Version="1.1">
+        <Input Name="TargetTorque" Type="REAL" />
+        <Input Name="ActualTorque" Type="REAL" />
+        <Input Name="Enable" Type="BOOL" />
+        <Output Name="TorqueOK" Type="BOOL" />
+        <Output Name="Fault" Type="BOOL" />
+        <Static Name="TorqueError" Type="REAL" />
+    </FB>
+    <FC Name="safety_interlock" Version="1.1">
+        <Input Name="GuardClosed" Type="BOOL" />
+        <Input Name="EStop" Type="BOOL" />
+        <Output Name="SafeToRun" Type="BOOL" />
+    </FC>
+    <DB Name="torque_control_v1.1" Version="1.1">
+        <Static Name="Setpoint" Type="REAL" />
+        <Static Name="PID_Parameters" Type="Struct" />
+    </DB>
+</InterfaceDefinitions>

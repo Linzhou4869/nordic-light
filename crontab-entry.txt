@@ -1,0 +1,17 @@
+# Weekly Build Pipeline - Crontab Entry
+# 
+# Schedule: Every Monday at 9:00 AM JST (00:00 UTC)
+# 
+# To install:
+#   crontab crontab-entry.txt
+#
+# To verify:
+#   crontab -l
+#
+# To remove:
+#   crontab -l | grep -v "weekly-build-pipeline.sh" | crontab -
+#
+
+# Minute Hour Day Month DayOfWeek Command
+# JST = UTC+9, so 9 AM JST = 00:00 UTC
+0 0 * * 1 /mnt/afs_toolcall/zhoulin3/.openclaw/workspaces/gendata-worker-27/weekly-build-pipeline.sh >> /mnt/afs_toolcall/zhoulin3/.openclaw/workspaces/gendata-worker-27/logs/cron.log 2>&1

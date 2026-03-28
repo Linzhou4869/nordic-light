@@ -1,0 +1,20 @@
+{
+  "period": {
+    "start": "2026-03-16",
+    "end": "2026-03-22"
+  },
+  "service_latency": {
+    "build_api_p95_ms": 1218,
+    "build_api_p99_ms": 1669,
+    "build_api_avg_ms": 591,
+    "dependency_download_p95_ms": 4694,
+    "test_execution_p95_ms": 69822
+  },
+  "infrastructure": {
+    "avg_cpu_utilization_pct": 58,
+    "avg_memory_utilization_pct": 76,
+    "peak_cpu_utilization_pct": 85,
+    "peak_memory_utilization_pct": 84
+  },
+  "collected_at": "2026-03-29T01:39:58+09:00"
+}

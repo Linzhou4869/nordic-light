@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HardwareConfiguration>
+    <PLC Name="CHASSIS_WELD_PLC" Type="S7-1500" Firmware="V2.9"/>
+    <IO-Modules>
+        <Module Slot="1" Type="DI32x24VDC" Address="I0.0-I3.7"/>
+        <Module Slot="2" Type="DQ16x24VDC" Address="Q0.0-Q1.7"/>
+        <Module Slot="3" Type="AI8x12BIT" Address="IW0-IW14"/>
+        <Module Slot="4" Type="AQ4x12BIT" Address="QW0-QW6"/>
+    </IO-Modules>
+    <SafetyConfiguration>
+        <F-Module Slot="5" Type="F-DI8/F-DQ4" Address="I4.0-I4.7/Q2.0-Q2.3"/>
+        <SafetyLevel>SIL3</SafetyLevel>
+    </SafetyConfiguration>
+</HardwareConfiguration>

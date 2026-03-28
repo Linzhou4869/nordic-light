@@ -1,0 +1,16 @@
+[2026-03-29 01:39:58 JST] === Weekly Build Metrics Pipeline Started ===
+[2026-03-29 01:39:58 JST] Report Period: 2026-03-16 to 2026-03-22
+[2026-03-29 01:39:58 JST] Workspace: /mnt/afs_toolcall/zhoulin3/.openclaw/workspaces/gendata-worker-27
+[2026-03-29 01:39:58 JST] >>> Collecting build success metrics...
+[2026-03-29 01:39:58 JST]   Checking project: spring-petclinic
+[2026-03-29 01:39:58 JST]   ✓ Metrics saved to /mnt/afs_toolcall/zhoulin3/.openclaw/workspaces/gendata-worker-27/data/build-metrics-spring-petclinic-2026-03-29.json
+[2026-03-29 01:39:58 JST] >>> Collecting latency metrics...
+[2026-03-29 01:39:58 JST]   ✓ Latency metrics saved to /mnt/afs_toolcall/zhoulin3/.openclaw/workspaces/gendata-worker-27/data/latency-metrics-2026-03-29.json
+[2026-03-29 01:39:58 JST] >>> Generating weekly summary report...
+[2026-03-29 01:39:59 JST]   ✓ Report saved to /mnt/afs_toolcall/zhoulin3/.openclaw/workspaces/gendata-worker-27/reports/weekly-build-report-2026-03-16.md
+[2026-03-29 01:39:59 JST] >>> Archiving old data...
+[2026-03-29 01:39:59 JST]   ✓ Cleanup complete
+[2026-03-29 01:39:59 JST] >>> Pipeline execution complete
+[2026-03-29 01:39:59 JST] Report available at: [2026-03-29 01:39:59 JST]   ✓ Report saved to /mnt/afs_toolcall/zhoulin3/.openclaw/workspaces/gendata-worker-27/reports/weekly-build-report-2026-03-16.md
+/mnt/afs_toolcall/zhoulin3/.openclaw/workspaces/gendata-worker-27/reports/weekly-build-report-2026-03-16.md
+[2026-03-29 01:39:59 JST] === Weekly Build Metrics Pipeline Completed ===

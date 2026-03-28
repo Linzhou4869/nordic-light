@@ -1,0 +1,24 @@
+{
+  "project": "spring-petclinic",
+  "period": {
+    "start": "2026-03-16",
+    "end": "2026-03-22"
+  },
+  "build_metrics": {
+    "total_builds": 55,
+    "successful_builds": 51,
+    "failed_builds": 4,
+    "success_rate": ,
+    "average_duration_seconds": 131,
+    "min_duration_seconds": 101,
+    "max_duration_seconds": 176
+  },
+  "failure_breakdown": {
+    "compilation_errors": 2,
+    "test_failures": 1,
+    "dependency_issues": 1,
+    "timeout_errors": 1,
+    "other": 0
+  },
+  "collected_at": "2026-03-29T01:39:58+09:00"
+}

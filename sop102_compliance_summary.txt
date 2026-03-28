@@ -1,0 +1,29 @@
+SOP-102 COMPLIANCE SUMMARY
+==========================
+Incident Report #992 | Packaging Line 3 | 2026-03-28 14:30
+
+NON-COMPLIANCE IDENTIFIED
+-------------------------
+Rule Violation: SOP-102 requires pressure sensors to trigger BELOW 5 PSI
+
+OUT-OF-SPEC PARAMETERS
+----------------------
+Sensor ID:        B-4
+Current Setting:  8 PSI (trigger threshold)
+Required Setting: 5 PSI (maximum per SOP-102)
+Deviation:        +3 PSI (60% above spec)
+
+IMPACT
+------
+- Sensor B-4 failed to register pressure drop at correct threshold
+- Conveyor halt delayed by 12 seconds
+- Safety Interlock activation delayed
+
+CORRECTIVE ACTION REQUIRED
+--------------------------
+1. Recalibrate Sensor B-4 threshold from 8 PSI to 5 PSI
+2. Verify calibration with test pressure drop
+3. Document recalibration in maintenance log
+4. Review other sensors on Packaging Line 3 for similar drift
+
+STATUS: PENDING CORRECTION
