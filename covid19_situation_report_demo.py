@@ -23,13 +23,15 @@ from covid19_situation_report import (
 
 
 def generate_mock_data(days: int = 7) -> List[DailyCaseData]:
-    """Generate realistic mock COVID-19 data for testing."""
+    """Generate realistic mock COVID-19 data matching actual API structure."""
     
     # Base values with some variation
     base_cases = 1500
     base_deaths = 25
     base_recoveries = 1200
+    base_hospitalized = 450
     base_tests = 50000
+    base_vaccinations = 12000
     
     data = []
     end_date = datetime.now()
@@ -42,16 +44,12 @@ def generate_mock_data(days: int = 7) -> List[DailyCaseData]:
         
         daily_data = DailyCaseData(
             date=date.strftime("%Y-%m-%d"),
-            new_cases=int(base_cases * variation * (0.8 + 0.4 * (i % 3) / 3)),
-            new_deaths=int(base_deaths * (0.7 + 0.6 * (i % 2))),
-            new_recoveries=int(base_recoveries * variation),
-            total_cases=1250000 + i * 1500,
-            total_deaths=12500 + i * 25,
-            total_recoveries=1100000 + i * 1200,
-            active_cases=137500,
+            confirmed_cases=int(base_cases * variation * (0.8 + 0.4 * (i % 3) / 3)),
+            deaths=int(base_deaths * (0.7 + 0.6 * (i % 2))),
+            recovered=int(base_recoveries * variation),
+            hospitalized=int(base_hospitalized * (0.9 + 0.2 * (i % 5) / 5)),
             tests_conducted=int(base_tests * (0.9 + 0.2 * (i % 4) / 4)),
-            positivity_rate=2.5 + (i % 3) * 0.5,
-            region="National"
+            vaccinations_administered=int(base_vaccinations * (1.0 + 0.1 * (i % 7) / 7))
         )
         data.append(daily_data)
     
@@ -96,10 +94,12 @@ def main():
     print("7-DAY SITUATION SUMMARY")
     print("=" * 60)
     print(f"📅 Period: {report.period_start} to {report.period_end}")
-    print(f"🦠 Total New Cases: {report.total_new_cases:,}")
-    print(f"💀 Total New Deaths: {report.total_new_deaths:,}")
-    print(f"✅ Total New Recoveries: {report.total_new_recoveries:,}")
+    print(f"🦠 Total Confirmed Cases: {report.total_new_cases:,}")
+    print(f"💀 Total Deaths: {report.total_new_deaths:,}")
+    print(f"✅ Total Recovered: {report.total_new_recoveries:,}")
+    print(f"🏥 Total Hospitalized: {report.total_hospitalized:,}")
     print(f"🧪 Total Tests: {report.total_tests:,}")
+    print(f"💉 Total Vaccinations: {report.total_vaccinations:,}")
     print()
     print(f"📊 Average Daily Cases: {report.avg_daily_cases:,.1f}")
     print(f"📈 Case Trend: {report.case_trend.upper()} ({report.trend_percentage:+.1f}%)")
@@ -107,7 +107,9 @@ def main():
     print()
     print(f"⚠️  Case Fatality Rate: {report.case_fatality_rate:.2f}%")
     print(f"✅ Recovery Rate: {report.recovery_rate:.2f}%")
+    print(f"🏥 Hospitalization Rate: {report.hospitalization_rate:.2f}%")
     print(f"🧪 Tests Per Case: {report.tests_per_case:,.1f}")
+    print(f"💉 Vaccination Coverage: {report.vaccination_coverage:.1f} doses/case")
     print("=" * 60)
     print()
     print("💡 To use with real data:")

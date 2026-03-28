@@ -21,9 +21,9 @@ from pathlib import Path
 # ============================================================================
 
 API_CONFIG = {
-    "base_url": "https://api.covid-surveillance.gov.cn",  # Replace with actual API URL
-    "endpoint": "/api/v1/cases/daily",
-    "api_key": "",  # Set via environment variable or config file
+    "base_url": "https://api.health-surveillance.gov",
+    "endpoint": "/v2/cases/daily",
+    "api_key": "",  # Set via environment variable COVID_API_KEY
     "timeout": 30,
     "retry_attempts": 3,
 }
@@ -43,16 +43,37 @@ OUTPUT_CONFIG = {
 class DailyCaseData:
     """Represents daily COVID-19 case data."""
     date: str
-    new_cases: int
-    new_deaths: int
-    new_recoveries: int
-    total_cases: int
-    total_deaths: int
-    total_recoveries: int
-    active_cases: int
+    confirmed_cases: int
+    deaths: int
+    recovered: int
+    hospitalized: int
     tests_conducted: int
-    positivity_rate: float
+    vaccinations_administered: int
+    total_cases: int = 0
+    total_deaths: int = 0
+    total_recoveries: int = 0
+    positivity_rate: float = 0.0
     region: str = "National"
+    
+    @property
+    def new_cases(self) -> int:
+        """Alias for confirmed_cases (daily new confirmed)."""
+        return self.confirmed_cases
+    
+    @property
+    def new_deaths(self) -> int:
+        """Alias for deaths (daily new deaths)."""
+        return self.deaths
+    
+    @property
+    def new_recoveries(self) -> int:
+        """Alias for recovered (daily new recoveries)."""
+        return self.recovered
+    
+    @property
+    def active_cases(self) -> int:
+        """Calculated active cases."""
+        return self.hospitalized
 
 
 @dataclass
@@ -68,6 +89,8 @@ class SituationReport:
     total_new_deaths: int
     total_new_recoveries: int
     total_tests: int
+    total_vaccinations: int
+    total_hospitalized: int
     
     # Statistical metrics
     avg_daily_cases: float
@@ -75,6 +98,8 @@ class SituationReport:
     std_dev_cases: float
     avg_daily_deaths: float
     avg_positivity_rate: float
+    avg_daily_vaccinations: float
+    avg_daily_hospitalized: float
     
     # Trend analysis
     case_trend: str  # "increasing", "decreasing", "stable"
@@ -86,6 +111,8 @@ class SituationReport:
     case_fatality_rate: float
     recovery_rate: float
     tests_per_case: float
+    hospitalization_rate: float
+    vaccination_coverage: float
 
 
 # ============================================================================
@@ -147,22 +174,40 @@ class COVID19APIClient:
         return []
     
     def _parse_api_response(self, data: Dict[str, Any]) -> List[DailyCaseData]:
-        """Parse API response into DailyCaseData objects."""
+        """Parse API response into DailyCaseData objects.
+        
+        Expected API response structure:
+        {
+            "data": [
+                {
+                    "date": "2026-03-28",
+                    "confirmed_cases": 1523,
+                    "deaths": 28,
+                    "recovered": 1245,
+                    "hospitalized": 450,
+                    "tests_conducted": 50000,
+                    "vaccinations_administered": 12000
+                }
+            ]
+        }
+        """
         cases = []
         
-        # Adjust field names based on your actual API response structure
         for item in data.get("data", []):
+            # Calculate positivity rate if both fields are available
+            tests = item.get("tests_conducted", 0)
+            confirmed = item.get("confirmed_cases", 0)
+            positivity_rate = (confirmed / tests * 100) if tests > 0 else 0.0
+            
             case = DailyCaseData(
                 date=item.get("date", ""),
-                new_cases=item.get("new_cases", 0),
-                new_deaths=item.get("new_deaths", 0),
-                new_recoveries=item.get("new_recoveries", 0),
-                total_cases=item.get("total_cases", 0),
-                total_deaths=item.get("total_deaths", 0),
-                total_recoveries=item.get("total_recoveries", 0),
-                active_cases=item.get("active_cases", 0),
+                confirmed_cases=item.get("confirmed_cases", 0),
+                deaths=item.get("deaths", 0),
+                recovered=item.get("recovered", 0),
+                hospitalized=item.get("hospitalized", 0),
                 tests_conducted=item.get("tests_conducted", 0),
-                positivity_rate=item.get("positivity_rate", 0.0),
+                vaccinations_administered=item.get("vaccinations_administered", 0),
+                positivity_rate=positivity_rate,
                 region=item.get("region", "National")
             )
             cases.append(case)
@@ -191,17 +236,21 @@ class StatisticalAnalyzer:
             raise ValueError("No data provided for analysis")
         
         # Extract metrics
-        cases = [d.new_cases for d in daily_data]
-        deaths = [d.new_deaths for d in daily_data]
-        positivity_rates = [d.positivity_rate for d in daily_data]
+        cases = [d.confirmed_cases for d in daily_data]
+        deaths = [d.deaths for d in daily_data]
+        recoveries = [d.recovered for d in daily_data]
+        hospitalized = [d.hospitalized for d in daily_data]
         tests = [d.tests_conducted for d in daily_data]
-        recoveries = [d.new_recoveries for d in daily_data]
+        vaccinations = [d.vaccinations_administered for d in daily_data]
+        positivity_rates = [d.positivity_rate for d in daily_data]
         
         # Calculate summary statistics
         total_new_cases = sum(cases)
         total_new_deaths = sum(deaths)
         total_new_recoveries = sum(recoveries)
         total_tests = sum(tests)
+        total_vaccinations = sum(vaccinations)
+        total_hospitalized = sum(hospitalized)
         
         # Statistical measures
         avg_daily_cases = statistics.mean(cases) if cases else 0
@@ -209,6 +258,8 @@ class StatisticalAnalyzer:
         std_dev_cases = statistics.stdev(cases) if len(cases) > 1 else 0
         avg_daily_deaths = statistics.mean(deaths) if deaths else 0
         avg_positivity_rate = statistics.mean(positivity_rates) if positivity_rates else 0
+        avg_daily_vaccinations = statistics.mean(vaccinations) if vaccinations else 0
+        avg_daily_hospitalized = statistics.mean(hospitalized) if hospitalized else 0
         
         # Trend analysis
         case_trend, trend_percentage = self._calculate_trend(cases)
@@ -219,10 +270,11 @@ class StatisticalAnalyzer:
         peak_cases = max(cases) if cases else 0
         
         # Derived metrics
-        total_cases = sum(d.total_cases for d in daily_data[-1:]) if daily_data else 0
         case_fatality_rate = (total_new_deaths / total_new_cases * 100) if total_new_cases > 0 else 0
         recovery_rate = (total_new_recoveries / total_new_cases * 100) if total_new_cases > 0 else 0
         tests_per_case = (total_tests / total_new_cases) if total_new_cases > 0 else 0
+        hospitalization_rate = (sum(hospitalized) / total_new_cases * 100) if total_new_cases > 0 else 0
+        vaccination_coverage = (total_vaccinations / total_new_cases) if total_new_cases > 0 else 0
         
         return SituationReport(
             report_date=datetime.now().strftime("%Y-%m-%d %H:%M"),
@@ -233,18 +285,24 @@ class StatisticalAnalyzer:
             total_new_deaths=total_new_deaths,
             total_new_recoveries=total_new_recoveries,
             total_tests=total_tests,
+            total_vaccinations=total_vaccinations,
+            total_hospitalized=total_hospitalized,
             avg_daily_cases=avg_daily_cases,
             median_daily_cases=median_daily_cases,
             std_dev_cases=std_dev_cases,
             avg_daily_deaths=avg_daily_deaths,
             avg_positivity_rate=avg_positivity_rate,
+            avg_daily_vaccinations=avg_daily_vaccinations,
+            avg_daily_hospitalized=avg_daily_hospitalized,
             case_trend=case_trend,
             trend_percentage=trend_percentage,
             peak_day=peak_day,
             peak_cases=peak_cases,
             case_fatality_rate=case_fatality_rate,
             recovery_rate=recovery_rate,
-            tests_per_case=tests_per_case
+            tests_per_case=tests_per_case,
+            hospitalization_rate=hospitalization_rate,
+            vaccination_coverage=vaccination_coverage
         )
     
     def _calculate_trend(self, values: List[int]) -> tuple:
@@ -306,10 +364,12 @@ class ReportGenerator:
 
 | Metric | Value |
 |--------|-------|
-| Total New Cases | {report.total_new_cases:,} |
-| Total New Deaths | {report.total_new_deaths:,} |
-| Total New Recoveries | {report.total_new_recoveries:,} |
+| Total Confirmed Cases | {report.total_new_cases:,} |
+| Total Deaths | {report.total_new_deaths:,} |
+| Total Recovered | {report.total_new_recoveries:,} |
+| Total Hospitalized | {report.total_hospitalized:,} |
 | Total Tests Conducted | {report.total_tests:,} |
+| Total Vaccinations Administered | {report.total_vaccinations:,} |
 
 ### Key Findings
 
@@ -317,6 +377,7 @@ class ReportGenerator:
 - **Average Daily Cases:** {report.avg_daily_cases:,.1f}
 - **Peak Day:** {report.peak_day} ({report.peak_cases:,} cases)
 - **Average Positivity Rate:** {report.avg_positivity_rate:.2f}%
+- **Average Daily Vaccinations:** {report.avg_daily_vaccinations:,.0f}
 
 ---
 
@@ -337,19 +398,22 @@ class ReportGenerator:
 |--------|-------|
 | Case Fatality Rate (CFR) | {report.case_fatality_rate:.2f}% |
 | Recovery Rate | {report.recovery_rate:.2f}% |
+| Hospitalization Rate | {report.hospitalization_rate:.2f}% |
 | Tests Per Case | {report.tests_per_case:,.1f} |
+| Vaccination Coverage (doses/case) | {report.vaccination_coverage:.1f} |
 | Average Daily Deaths | {report.avg_daily_deaths:,.1f} |
+| Average Daily Hospitalized | {report.avg_daily_hospitalized:,.0f} |
 
 ---
 
 ## Daily Breakdown
 
-| Date | New Cases | New Deaths | New Recoveries | Tests | Positivity |
-|------|-----------|------------|----------------|-------|------------|
+| Date | Confirmed | Deaths | Recovered | Hospitalized | Tests | Vaccinations |
+|------|-----------|--------|-----------|--------------|-------|--------------|
 """
         
         for day in daily_data:
-            md += f"| {day.date} | {day.new_cases:,} | {day.new_deaths:,} | {day.new_recoveries:,} | {day.tests_conducted:,} | {day.positivity_rate:.2f}% |\n"
+            md += f"| {day.date} | {day.confirmed_cases:,} | {day.deaths:,} | {day.recovered:,} | {day.hospitalized:,} | {day.tests_conducted:,} | {day.vaccinations_administered:,} |\n"
         
         md += f"""
 ---
@@ -404,14 +468,18 @@ comparing the first half to the second half of the analysis period.
                 "total_new_cases": report.total_new_cases,
                 "total_new_deaths": report.total_new_deaths,
                 "total_new_recoveries": report.total_new_recoveries,
-                "total_tests": report.total_tests
+                "total_hospitalized": report.total_hospitalized,
+                "total_tests": report.total_tests,
+                "total_vaccinations": report.total_vaccinations
             },
             "statistics": {
                 "avg_daily_cases": report.avg_daily_cases,
                 "median_daily_cases": report.median_daily_cases,
                 "std_dev_cases": report.std_dev_cases,
                 "avg_daily_deaths": report.avg_daily_deaths,
-                "avg_positivity_rate": report.avg_positivity_rate
+                "avg_positivity_rate": report.avg_positivity_rate,
+                "avg_daily_vaccinations": report.avg_daily_vaccinations,
+                "avg_daily_hospitalized": report.avg_daily_hospitalized
             },
             "trends": {
                 "case_trend": report.case_trend,
@@ -422,15 +490,19 @@ comparing the first half to the second half of the analysis period.
             "derived_metrics": {
                 "case_fatality_rate": report.case_fatality_rate,
                 "recovery_rate": report.recovery_rate,
-                "tests_per_case": report.tests_per_case
+                "hospitalization_rate": report.hospitalization_rate,
+                "tests_per_case": report.tests_per_case,
+                "vaccination_coverage": report.vaccination_coverage
             },
             "daily_data": [
                 {
                     "date": d.date,
-                    "new_cases": d.new_cases,
-                    "new_deaths": d.new_deaths,
-                    "new_recoveries": d.new_recoveries,
+                    "confirmed_cases": d.confirmed_cases,
+                    "deaths": d.deaths,
+                    "recovered": d.recovered,
+                    "hospitalized": d.hospitalized,
                     "tests_conducted": d.tests_conducted,
+                    "vaccinations_administered": d.vaccinations_administered,
                     "positivity_rate": d.positivity_rate
                 }
                 for d in daily_data
