@@ -14,6 +14,23 @@ This document summarizes the approval workflow gate configured for the **Soil Ni
 | **Manuscript** | Soil Nitrogen Dynamics in Organic Grain Rotation Systems |
 | **Status** | Awaiting Review |
 | **Created** | 2026-03-29 |
+| **Data Verified** | Yes - Zone A-D exact measurements |
+
+---
+
+## Study Data Summary
+
+| Test Zone | Nitrogen (mg/kg) | Soil pH | Yield (t/ha) | Compliance Margin |
+|-----------|------------------|---------|--------------|-------------------|
+| Zone A | 20 | 6.8 | 4.5 | +33% |
+| Zone B | 18 | 6.9 | 4.2 | +20% |
+| Zone C | 22 | 6.7 | 4.8 | +47% |
+| Zone D | 19 | 7.0 | 4.3 | +27% |
+| **Mean** | **19.75** | **6.85** | **4.45** | **+32%** |
+
+**Baseline Threshold:** 15 mg/kg  
+**Compliance Status:** 100% (4/4 zones exceed baseline)  
+**Nitrogen-Yield Correlation:** r = 0.996
 
 ---
 
