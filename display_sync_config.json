@@ -1,0 +1,42 @@
+{
+  "sync_group": "nordic_light_guest_welcome",
+  "master_node": {
+    "id": "lobby-main-01",
+    "location": "Main Lobby",
+    "display_type": "LED_WALL_4K",
+    "output_zone": "zone_a"
+  },
+  "slave_nodes": [
+    {
+      "id": "corridor-sec-02",
+      "location": "Secondary Corridor",
+      "display_type": "LCD_PORTRAIT_1080p",
+      "output_zone": "zone_b",
+      "sync_mode": "mirror"
+    }
+  ],
+  "content": {
+    "loop_name": "guest_welcome_loop",
+    "playlist": [
+      "welcome_animation_v2.mp4",
+      "exhibition_intro.mp4",
+      "visitor_guidelines.mp4"
+    ],
+    "duration_seconds": 180,
+    "auto_restart": true
+  },
+  "synchronization": {
+    "protocol": "ntp",
+    "time_server": "pool.ntp.org",
+    "sync_interval_ms": 1000,
+    "frame_lock": true,
+    "audio_sync": "master_only"
+  },
+  "schedule": {
+    "active_hours": {
+      "start": "09:00",
+      "end": "18:00"
+    },
+    "days": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+  }
+}

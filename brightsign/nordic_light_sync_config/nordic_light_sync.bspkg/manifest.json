@@ -1,0 +1,64 @@
+{
+  "packageInfo": {
+    "packageName": "Nordic Light Guest Welcome Sync",
+    "packageVersion": "1.0.0",
+    "packageId": "com.copenhagen-art.nordic-light-sync",
+    "description": "Display synchronization configuration for Nordic Light virtual gallery - Main Lobby and Secondary Corridor",
+    "author": "Copenhagen Art Museum AV Team",
+    "createdDate": "2026-03-29"
+  },
+  "targetDevices": [
+    {
+      "deviceId": "lobby-main-01",
+      "model": "BrightSign XD133",
+      "location": "Main Lobby",
+      "role": "master",
+      "serialNumber": "TBD",
+      "firmwareMinVersion": "9.2.20"
+    },
+    {
+      "deviceId": "corridor-sec-02",
+      "model": "BrightSign HD102",
+      "location": "Secondary Corridor",
+      "role": "slave",
+      "serialNumber": "TBD",
+      "firmwareMinVersion": "9.2.20"
+    }
+  ],
+  "content": {
+    "playlist": "guest_welcome_loop",
+    "duration": 180,
+    "files": [
+      "welcome_animation_v2.mp4",
+      "exhibition_intro.mp4",
+      "visitor_guidelines.mp4"
+    ]
+  },
+  "synchronization": {
+    "enabled": true,
+    "protocol": "BrightSign Network",
+    "masterDevice": "lobby-main-01",
+    "slaveDevices": ["corridor-sec-02"],
+    "frameLock": true,
+    "audioSync": "master_only",
+    "ntpServer": "pool.ntp.org",
+    "syncIntervalMs": 1000
+  },
+  "schedule": {
+    "enabled": true,
+    "startTime": "09:00",
+    "endTime": "18:00",
+    "daysOfWeek": [1, 2, 3, 4, 5, 6, 7],
+    "timezone": "Europe/Copenhagen"
+  },
+  "presentation": {
+    "master": {
+      "script": "master_player.brs",
+      "config": "master_config.json"
+    },
+    "slave": {
+      "script": "slave_player.brs",
+      "config": "slave_config.json"
+    }
+  }
+}

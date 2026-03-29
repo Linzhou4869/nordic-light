@@ -1,0 +1,47 @@
+{
+  "DeviceConfig": {
+    "DeviceId": "corridor-sec-02",
+    "DeviceName": "Nordic Light - Secondary Corridor",
+    "Location": "Secondary Corridor (East Wing)",
+    "Orientation": "portrait"
+  },
+  "DisplayConfig": {
+    "Resolution": "1080x1920",
+    "RefreshRate": 60,
+    "OutputPort": "HDMI",
+    "AudioOutput": "disabled"
+  },
+  "NetworkConfig": {
+    "Mode": "slave",
+    "MasterIPAddress": "192.168.1.100",
+    "SyncPort": 8080,
+    "ListenAddress": "0.0.0.0",
+    "SyncTimeoutMs": 5000,
+    "ReconnectIntervalMs": 10000
+  },
+  "Playlist": [
+    "media/welcome_animation_v2.mp4",
+    "media/exhibition_intro.mp4",
+    "media/visitor_guidelines.mp4"
+  ],
+  "Schedule": {
+    "Enabled": true,
+    "StartTime": "09:00:00",
+    "EndTime": "18:00:00",
+    "TimeZone": "Europe/Copenhagen",
+    "DaysActive": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
+    "SyncWithMaster": true
+  },
+  "SyncConfig": {
+    "FrameLock": true,
+    "AudioSync": "disabled",
+    "MasterDevice": "lobby-main-01",
+    "MaxDriftMs": 50,
+    "RecoveryMode": "wait_for_master"
+  },
+  "Logging": {
+    "Level": "info",
+    "OutputFile": "/logs/slave_sync.log",
+    "SyncEvents": true
+  }
+}

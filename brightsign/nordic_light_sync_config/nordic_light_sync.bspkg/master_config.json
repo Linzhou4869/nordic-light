@@ -1,0 +1,45 @@
+{
+  "DeviceConfig": {
+    "DeviceId": "lobby-main-01",
+    "DeviceName": "Nordic Light - Main Lobby",
+    "Location": "Main Lobby Entrance",
+    "Orientation": "landscape"
+  },
+  "DisplayConfig": {
+    "Resolution": "1920x1080",
+    "RefreshRate": 60,
+    "OutputPort": "HDMI",
+    "AudioOutput": "enabled"
+  },
+  "NetworkConfig": {
+    "Mode": "master",
+    "SyncPort": 8080,
+    "BroadcastAddress": "239.255.0.1",
+    "NTPServer": "pool.ntp.org",
+    "SyncIntervalMs": 1000
+  },
+  "Playlist": [
+    "media/welcome_animation_v2.mp4",
+    "media/exhibition_intro.mp4",
+    "media/visitor_guidelines.mp4"
+  ],
+  "Schedule": {
+    "Enabled": true,
+    "StartTime": "09:00:00",
+    "EndTime": "18:00:00",
+    "TimeZone": "Europe/Copenhagen",
+    "DaysActive": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+  },
+  "SyncConfig": {
+    "FrameLock": true,
+    "AudioSync": "master_only",
+    "SlaveDevices": ["corridor-sec-02"],
+    "MaxDriftMs": 50,
+    "RecoveryMode": "auto_resync"
+  },
+  "Logging": {
+    "Level": "info",
+    "OutputFile": "/logs/master_sync.log",
+    "SyncEvents": true
+  }
+}
