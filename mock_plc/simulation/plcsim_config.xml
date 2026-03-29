@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<S7-PLCSIM-Configuration>
+    <PLC-Model>S7-1500</PLC-Model>
+    <Firmware-Version>V2.9</Firmware-Version>
+    <Load-Blocks>
+        <Block Path="blocks/torque_control_v1.1.db" Type="DB" />
+        <Block Path="blocks/torque_monitoring.fb" Type="FB" />
+        <Block Path="blocks/safety_interlock.fc" Type="FC" />
+    </Load-Blocks>
+    <Test-Sequence>
+        <Step Name="Initialize" Duration="1000ms" />
+        <Step Name="Torque_Ramp" Duration="5000ms" />
+        <Step Name="Safety_Check" Duration="2000ms" />
+        <Step Name="Full_Cycle" Duration="10000ms" />
+    </Test-Sequence>
+    <Watch-Table Path="watch_tables/torque_signals.txt" />
+</S7-PLCSIM-Configuration>

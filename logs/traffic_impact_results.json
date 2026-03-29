@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-03-29T16:08:39.860096",
+  "threshold": 0.8,
+  "results": [
+    {
+      "name": "North Gate",
+      "designed_capacity": 1500,
+      "projected_usage": 1200,
+      "utilization_pct": 80.0,
+      "status": "\u26a0\ufe0f BREACH",
+      "breaches_threshold": true
+    },
+    {
+      "name": "South Plaza",
+      "designed_capacity": 1200,
+      "projected_usage": 850,
+      "utilization_pct": 70.83333333333334,
+      "status": "\u2705 APPROVED",
+      "breaches_threshold": false
+    },
+    {
+      "name": "East Connector",
+      "designed_capacity": 1750,
+      "projected_usage": 1400,
+      "utilization_pct": 80.0,
+      "status": "\u26a0\ufe0f BREACH",
+      "breaches_threshold": true
+    }
+  ],
+  "summary": {
+    "total_capacity": 4450,
+    "total_usage": 3450,
+    "breach_count": 2
+  }
+}

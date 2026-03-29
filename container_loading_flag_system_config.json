@@ -1,0 +1,585 @@
+{
+  "workflowName": "Container Loading Flag System",
+  "version": "1.0.0",
+  "effectiveDate": "2026-04-01",
+  "description": "Automated trigger system for manual container inspection during loading operations. Activates based on IMO circular compliance requirements and historical incident patterns from vessel OPS-LISBON-VESSEL-908.",
+  "triggerCategories": {
+    "dangerousGoods": {
+      "categoryCode": "DG",
+      "priority": "CRITICAL",
+      "triggers": [
+        {
+          "triggerId": "DG-001",
+          "name": "Missing IMDG Column 17 Data",
+          "condition": "shippingDocument.column17 == null OR shippingDocument.column17.flashpoint == null OR shippingDocument.column17.toxicityLevel == null",
+          "description": "Container shipping documents lack required IMDG Code Column 17 information (flashpoint, toxicity level, corrosivity, physical state)",
+          "relatedCircular": "IMDG Code Amendments 43-26",
+          "relatedIncidents": ["INC-908-2024-003", "INC-908-2025-001", "INC-908-2025-009"],
+          "action": "HOLD_LOADING",
+          "inspectionRequired": true,
+          "approvalLevel": "CHIEF_OFFICER"
+        },
+        {
+          "triggerId": "DG-002",
+          "name": "Lithium Battery Shipment",
+          "condition": "cargo.unNumber IN ['UN3480', 'UN3481', 'UN3090', 'UN3091'] AND cargo.packagingGroup != 'VERIFIED'",
+          "description": "Lithium battery shipments require enhanced packaging verification per IMDG Code",
+          "relatedCircular": "IMDG Code Amendments 43-26",
+          "relatedIncidents": ["INC-908-2025-009"],
+          "action": "ENHANCED_INSPECTION",
+          "inspectionRequired": true,
+          "approvalLevel": "CHIEF_OFFICER"
+        },
+        {
+          "triggerId": "DG-003",
+          "name": "Undeclared DG Detection",
+          "condition": "container.xrayAnomaly == true OR container.sniffTestPositive == true",
+          "description": "Container screening indicates potential undeclared dangerous goods",
+          "relatedCircular": "IMDG Code",
+          "relatedIncidents": ["INC-908-2024-003"],
+          "action": "QUARANTINE",
+          "inspectionRequired": true,
+          "approvalLevel": "MASTER"
+        },
+        {
+          "triggerId": "DG-004",
+          "name": "DG Shipper Not on Approved List",
+          "condition": "shipper.dgComplianceRating == null OR shipper.dgComplianceRating < 0.85",
+          "description": "Shipper lacks approved DG documentation track record",
+          "relatedCircular": "IMDG Code Amendments 43-26",
+          "relatedIncidents": ["INC-908-2024-003", "INC-908-2025-001", "INC-908-2025-009"],
+          "action": "ENHANCED_DOCUMENT_CHECK",
+          "inspectionRequired": true,
+          "approvalLevel": "CHIEF_OFFICER"
+        }
+      ]
+    },
+    "bulkCargo": {
+      "categoryCode": "BC",
+      "priority": "HIGH",
+      "triggers": [
+        {
+          "triggerId": "BC-001",
+          "name": "IMSBC Schedule Mismatch",
+          "condition": "cargo.imsbcSchedule != 'CURRENT_08-25' OR cargo.imsbcSchedule == 'LEGACY'",
+          "description": "Bulk cargo declared under outdated IMSBC schedule (not 08-25 amendments)",
+          "relatedCircular": "IMSBC Code Amendments 08-25",
+          "relatedIncidents": ["INC-908-2024-007", "INC-908-2025-005", "INC-908-2026-001"],
+          "action": "HOLD_LOADING",
+          "inspectionRequired": true,
+          "approvalLevel": "CHIEF_OFFICER"
+        },
+        {
+          "triggerId": "BC-002",
+          "name": "Direct Reduced Iron Cargo",
+          "condition": "cargo.bcsnCode IN ['DIRECT REDUCED IRON (A)', 'DIRECT REDUCED IRON (B)'] AND cargo.moistureContent.certified == false",
+          "description": "DRI cargo requires certified moisture content testing per updated IMSBC schedule",
+          "relatedCircular": "IMSBC Code Amendments 08-25",
+          "relatedIncidents": ["INC-908-2024-007"],
+          "action": "HOLD_LOADING",
+          "inspectionRequired": true,
+          "approvalLevel": "CHIEF_OFFICER"
+        },
+        {
+          "triggerId": "BC-003",
+          "name": "Fish Meal Self-Heating Risk",
+          "condition": "cargo.bcsnCode CONTAINS 'FISH MEAL' AND (cargo.antioxidantTreatment == null OR cargo.antioxidantTreatment.declared == false)",
+          "description": "Fish meal cargo without declared antioxidant treatment poses self-heating risk",
+          "relatedCircular": "IMSBC Code Amendments 08-25",
+          "relatedIncidents": ["INC-908-2025-005"],
+          "action": "HOLD_LOADING",
+          "inspectionRequired": true,
+          "approvalLevel": "MASTER"
+        },
+        {
+          "triggerId": "BC-004",
+          "name": "New IMSBC Schedule Cargo",
+          "condition": "cargo.bcsnCode IN ['ZINC SLAG (coarse)', 'IRON ORE BRIQUETTES', 'PEA PROTEIN CONCENTRATE PELLETS', 'PHOSPHATE ROCK FINES (uncalcined)', 'APATITE CONCENTRATE', 'TUFF, COARSE', 'FERRIC SULPHATE GRANULAR', 'ALUMINIUM SULPHATE GRANULAR', 'ASPHALT GRANULATES', 'CRUSHED GRANODIORITE, COARSE']",
+          "description": "Cargo under new IMSBC 08-25 schedules requires enhanced verification",
+          "relatedCircular": "IMSBC Code Amendments 08-25",
+          "relatedIncidents": ["INC-908-2026-001"],
+          "action": "ENHANCED_INSPECTION",
+          "inspectionRequired": true,
+          "approvalLevel": "CHIEF_OFFICER"
+        },
+        {
+          "triggerId": "BC-005",
+          "name": "Bulk Cargo Temperature Anomaly",
+          "condition": "cargo.temperature > 55 OR cargo.temperatureRising == true",
+          "description": "Bulk cargo temperature exceeds safe threshold or showing rising trend",
+          "relatedCircular": "IMSBC Code",
+          "relatedIncidents": ["INC-908-2025-005"],
+          "action": "QUARANTINE",
+          "inspectionRequired": true,
+          "approvalLevel": "MASTER"
+        }
+      ]
+    },
+    "fumigation": {
+      "categoryCode": "FUM",
+      "priority": "CRITICAL",
+      "triggers": [
+        {
+          "triggerId": "FUM-001",
+          "name": "Phosphine Fumigation Detected",
+          "condition": "fumigation.fumigantType == 'PHOSPHINE' AND (fumigation.sealIntegrityTest != 'PASSED' OR fumigation.sealIntegrityTest == null)",
+          "description": "Phosphine fumigation without verified seal integrity test",
+          "relatedCircular": "MSC.1/Circ.1264/Rev.1",
+          "relatedIncidents": ["INC-908-2024-002"],
+          "action": "HOLD_LOADING",
+          "inspectionRequired": true,
+          "approvalLevel": "MASTER"
+        },
+        {
+          "triggerId": "FUM-002",
+          "name": "Missing Fumigation Warning Signs",
+          "condition": "container.fumigated == true AND (container.warningSignsApplied == false OR container.warningSignsApplied == null)",
+          "description": "Fumigated container lacks required warning signage at access points",
+          "relatedCircular": "MSC.1/Circ.1264/Rev.1",
+          "relatedIncidents": ["INC-908-2025-003"],
+          "action": "HOLD_LOADING",
+          "inspectionRequired": true,
+          "approvalLevel": "CHIEF_OFFICER"
+        },
+        {
+          "triggerId": "FUM-003",
+          "name": "Fumigation Gas Level Anomaly",
+          "condition": "gasMonitoring.phosphineLevel > 0.1 OR gasMonitoring.oxygenLevel < 19.5",
+          "description": "Gas monitoring detects phosphine leakage or oxygen deficiency",
+          "relatedCircular": "MSC.1/Circ.1264/Rev.1",
+          "relatedIncidents": ["INC-908-2024-002"],
+          "action": "EVACUATE_AND_VENTILATE",
+          "inspectionRequired": true,
+          "approvalLevel": "MASTER"
+        },
+        {
+          "triggerId": "FUM-004",
+          "name": "Fumigation Contractor Not Approved",
+          "condition": "fumigation.contractor.approved == false OR fumigation.contractor.lastAudit < '2025-06-01'",
+          "description": "Fumigation contractor not on approved list or audit expired",
+          "relatedCircular": "MSC.1/Circ.1264/Rev.1",
+          "relatedIncidents": ["INC-908-2024-002", "INC-908-2025-003"],
+          "action": "ENHANCED_VERIFICATION",
+          "inspectionRequired": true,
+          "approvalLevel": "CHIEF_OFFICER"
+        }
+      ]
+    },
+    "cargoSecuring": {
+      "categoryCode": "CS",
+      "priority": "HIGH",
+      "triggers": [
+        {
+          "triggerId": "CS-001",
+          "name": "Heavy Cargo Bay Weight Exceeded",
+          "condition": "bay.totalWeight > bay.maximumWeight OR bay.weightMargin < 5",
+          "description": "Container stack weight exceeds or approaches bay limit",
+          "relatedCircular": "MSC.1/Circ.1353/Rev.2",
+          "relatedIncidents": ["INC-908-2025-002"],
+          "action": "HOLD_LOADING",
+          "inspectionRequired": true,
+          "approvalLevel": "CHIEF_OFFICER"
+        },
+        {
+          "triggerId": "CS-002",
+          "name": "Lashing Software Discrepancy",
+          "condition": "lashingCalculation.softwareVersion != '5.0' OR lashingCalculation.manualVerification != 'COMPLETED'",
+          "description": "Lashing software not updated to v5.0 or manual verification not completed",
+          "relatedCircular": "MSC.1/Circ.1353/Rev.2",
+          "relatedIncidents": ["INC-908-2024-008"],
+          "action": "HOLD_LOADING",
+          "inspectionRequired": true,
+          "approvalLevel": "CHIEF_OFFICER"
+        },
+        {
+          "triggerId": "CS-003",
+          "name": "Project Cargo in Bay",
+          "condition": "cargo.type == 'PROJECT' OR cargo.type == 'OVERSIZED' OR cargo.weight > 50",
+          "description": "Heavy or oversized project cargo requires custom lashing verification",
+          "relatedCircular": "MSC.1/Circ.1353/Rev.2",
+          "relatedIncidents": ["INC-908-2024-001", "INC-908-2024-008"],
+          "action": "ENHANCED_INSPECTION",
+          "inspectionRequired": true,
+          "approvalLevel": "CHIEF_OFFICER"
+        },
+        {
+          "triggerId": "CS-004",
+          "name": "Lashing Equipment Inspection Expired",
+          "condition": "lashingEquipment.lastInspection > '180 days' OR lashingEquipment.certificationStatus != 'VALID'",
+          "description": "Lashing equipment inspection interval exceeded or certification invalid",
+          "relatedCircular": "MSC.1/Circ.1353/Rev.2",
+          "relatedIncidents": ["INC-908-2024-001", "INC-908-2025-008"],
+          "action": "HOLD_LOADING",
+          "inspectionRequired": true,
+          "approvalLevel": "CHIEF_OFFICER"
+        },
+        {
+          "triggerId": "CS-005",
+          "name": "Automated Twistlock System Active",
+          "condition": "twistlock.type == 'AUTOMATED' AND twistlock.batch IN ['SUSPECT_BATCH_2024']",
+          "description": "Automated twistlocks from suspect batch require manual verification",
+          "relatedCircular": "MSC.1/Circ.1353/Rev.2",
+          "relatedIncidents": ["INC-908-2024-005"],
+          "action": "MANUAL_OVERRIDE",
+          "inspectionRequired": true,
+          "approvalLevel": "CHIEF_OFFICER"
+        }
+      ]
+    },
+    "enclosedSpace": {
+      "categoryCode": "ES",
+      "priority": "CRITICAL",
+      "triggers": [
+        {
+          "triggerId": "ES-001",
+          "name": "Gas Monitor Calibration Expired",
+          "condition": "gasMonitor.calibrationExpiry < TODAY OR gasMonitor.calibrationExpiry < TODAY + 30",
+          "description": "Gas monitor calibration expired or expiring within 30 days",
+          "relatedCircular": "Revised A.1050(27)",
+          "relatedIncidents": ["INC-908-2026-002"],
+          "action": "SUSPEND_OPERATIONS",
+          "inspectionRequired": true,
+          "approvalLevel": "MASTER"
+        },
+        {
+          "triggerId": "ES-002",
+          "name": "Oxygen Level Anomaly",
+          "condition": "gasMonitoring.oxygenLevel < 19.5 OR gasMonitoring.oxygenLevel > 23.5",
+          "description": "Oxygen level outside safe range for enclosed space entry",
+          "relatedCircular": "Revised A.1050(27)",
+          "relatedIncidents": ["INC-908-2024-006"],
+          "action": "EVACUATE",
+          "inspectionRequired": true,
+          "approvalLevel": "MASTER"
+        },
+        {
+          "triggerId": "ES-003",
+          "name": "Enclosed Space Entry Without Permit",
+          "condition": "entry.permitIssued == false OR entry.permit.expired == true",
+          "description": "Enclosed space entry attempted without valid permit",
+          "relatedCircular": "Revised A.1050(27)",
+          "relatedIncidents": ["INC-908-2024-006"],
+          "action": "STOP_WORK",
+          "inspectionRequired": true,
+          "approvalLevel": "MASTER"
+        },
+        {
+          "triggerId": "ES-004",
+          "name": "Ventilation System Not Active",
+          "condition": "entry.spaceType == 'ENCLOSED' AND ventilation.active == false",
+          "description": "Enclosed space entry without active ventilation",
+          "relatedCircular": "Revised A.1050(27)",
+          "relatedIncidents": ["INC-908-2024-006"],
+          "action": "STOP_WORK",
+          "inspectionRequired": true,
+          "approvalLevel": "CHIEF_OFFICER"
+        }
+      ]
+    },
+    "pilotTransfer": {
+      "categoryCode": "PT",
+      "priority": "HIGH",
+      "triggers": [
+        {
+          "triggerId": "PT-001",
+          "name": "Mechanical Pilot Hoist Detected",
+          "condition": "pilotTransfer.equipmentType == 'MECHANICAL_HOIST'",
+          "description": "Mechanical pilot hoist in use (FORBIDDEN per SOLAS V/23)",
+          "relatedCircular": "SOLAS V/23 Amendments",
+          "relatedIncidents": ["INC-908-2025-006"],
+          "action": "STOP_OPERATIONS",
+          "inspectionRequired": true,
+          "approvalLevel": "MASTER"
+        },
+        {
+          "triggerId": "PT-002",
+          "name": "Pilot Ladder Certification Expired",
+          "condition": "pilotLadder.certificationExpiry < TODAY OR pilotLadder.lastInspection > '12 months'",
+          "description": "Pilot ladder certification expired or inspection interval exceeded",
+          "relatedCircular": "SOLAS V/23 Amendments",
+          "relatedIncidents": ["INC-908-2024-004"],
+          "action": "REPLACE_EQUIPMENT",
+          "inspectionRequired": true,
+          "approvalLevel": "CHIEF_OFFICER"
+        },
+        {
+          "triggerId": "PT-003",
+          "name": "Pilot Transfer Area Lighting Insufficient",
+          "condition": "pilotTransfer.areaLighting < 100 OR pilotTransfer.lightingFunctional == false",
+          "description": "Pilot transfer area lighting below required lux level or non-functional",
+          "relatedCircular": "SOLAS V/23 Amendments",
+          "relatedIncidents": ["INC-908-2024-004"],
+          "action": "REPAIR_BEFORE_USE",
+          "inspectionRequired": true,
+          "approvalLevel": "CHIEF_OFFICER"
+        }
+      ]
+    },
+    "vesselHistory": {
+      "categoryCode": "VH",
+      "priority": "MEDIUM",
+      "triggers": [
+        {
+          "triggerId": "VH-001",
+          "name": "Repeat Shipper with Prior Incident",
+          "condition": "shipper.priorIncidents > 0 AND shipper.lastIncidentDate < '12 months'",
+          "description": "Shipper has incident history within past 12 months",
+          "relatedCircular": "Multiple",
+          "relatedIncidents": ["Multiple"],
+          "action": "ENHANCED_VERIFICATION",
+          "inspectionRequired": true,
+          "approvalLevel": "CHIEF_OFFICER"
+        },
+        {
+          "triggerId": "VH-002",
+          "name": "High-Risk Port of Loading",
+          "condition": "port.pscRiskLevel IN ['HIGH', 'MEDIUM'] AND port.focusArea MATCHES cargo.type",
+          "description": "Loading at port with PSC focus area matching cargo type",
+          "relatedCircular": "Multiple",
+          "relatedIncidents": ["Multiple"],
+          "action": "PRE_LOADING_AUDIT",
+          "inspectionRequired": true,
+          "approvalLevel": "CHIEF_OFFICER"
+        },
+        {
+          "triggerId": "VH-003",
+          "name": "Heavy Weather Route",
+          "condition": "voyage.route.riskLevel == 'HIGH' AND voyage.season IN ['WINTER', 'MONSOON']",
+          "description": "Vessel transiting heavy weather region during high-risk season",
+          "relatedCircular": "MSC.1/Circ.1353/Rev.2",
+          "relatedIncidents": ["INC-908-2024-001"],
+          "action": "ENHANCED_LASHING",
+          "inspectionRequired": true,
+          "approvalLevel": "CHIEF_OFFICER"
+        }
+      ]
+    }
+  },
+  "actionDefinitions": {
+    "HOLD_LOADING": {
+      "description": "Stop loading operations immediately. Container must not be loaded until inspection completed and approved.",
+      "notificationTargets": ["CHIEF_OFFICER", "TERMINAL_SUPERINTENDENT", "SAFETY_OFFICER"],
+      "escalationTime": "30 minutes",
+      "requiresWrittenApproval": true
+    },
+    "ENHANCED_INSPECTION": {
+      "description": "Container requires enhanced inspection beyond standard procedures. Loading may continue with inspection.",
+      "notificationTargets": ["CHIEF_OFFICER", "SAFETY_OFFICER"],
+      "escalationTime": "1 hour",
+      "requiresWrittenApproval": false
+    },
+    "QUARANTINE": {
+      "description": "Container must be isolated in designated quarantine area. No loading until cleared by Master.",
+      "notificationTargets": ["MASTER", "CHIEF_OFFICER", "PORT_AUTHORITY"],
+      "escalationTime": "15 minutes",
+      "requiresWrittenApproval": true
+    },
+    "EVACUATE_AND_VENTILATE": {
+      "description": "Immediate evacuation of affected area. Activate emergency ventilation. No re-entry until gas levels safe.",
+      "notificationTargets": ["MASTER", "ALL_CREW", "PORT_EMERGENCY"],
+      "escalationTime": "IMMEDIATE",
+      "requiresWrittenApproval": false
+    },
+    "EVACUATE": {
+      "description": "Immediate evacuation of enclosed space or affected area.",
+      "notificationTargets": ["MASTER", "ALL_CREW"],
+      "escalationTime": "IMMEDIATE",
+      "requiresWrittenApproval": false
+    },
+    "STOP_WORK": {
+      "description": "Stop all work in affected area. Resume only after corrective action verified.",
+      "notificationTargets": ["CHIEF_OFFICER", "SAFETY_OFFICER"],
+      "escalationTime": "15 minutes",
+      "requiresWrittenApproval": true
+    },
+    "STOP_OPERATIONS": {
+      "description": "Stop all pilot transfer or related operations. Alternative arrangements required.",
+      "notificationTargets": ["MASTER", "CHIEF_OFFICER", "PILOT_STATION"],
+      "escalationTime": "IMMEDIATE",
+      "requiresWrittenApproval": true
+    },
+    "SUSPEND_OPERATIONS": {
+      "description": "Suspend all enclosed space entry operations until equipment verified.",
+      "notificationTargets": ["MASTER", "CHIEF_OFFICER", "SAFETY_OFFICER"],
+      "escalationTime": "IMMEDIATE",
+      "requiresWrittenApproval": true
+    },
+    "MANUAL_OVERRIDE": {
+      "description": "Automated system bypassed. Manual verification and approval required for each unit.",
+      "notificationTargets": ["CHIEF_OFFICER", "BOSUN"],
+      "escalationTime": "30 minutes",
+      "requiresWrittenApproval": true
+    },
+    "REPLACE_EQUIPMENT": {
+      "description": "Equipment must be replaced before operations can continue.",
+      "notificationTargets": ["CHIEF_OFFICER", "BOATSWAIN"],
+      "escalationTime": "1 hour",
+      "requiresWrittenApproval": false
+    },
+    "REPAIR_BEFORE_USE": {
+      "description": "Repair required before equipment can be used.",
+      "notificationTargets": ["CHIEF_OFFICER", "CHIEF_ENGINEER"],
+      "escalationTime": "2 hours",
+      "requiresWrittenApproval": false
+    },
+    "ENHANCED_VERIFICATION": {
+      "description": "Additional documentation or verification required before loading.",
+      "notificationTargets": ["CHIEF_OFFICER", "OPERATIONS_MANAGER"],
+      "escalationTime": "1 hour",
+      "requiresWrittenApproval": false
+    },
+    "PRE_LOADING_AUDIT": {
+      "description": "Pre-loading audit required. Review all documentation before loading commences.",
+      "notificationTargets": ["CHIEF_OFFICER", "SAFETY_OFFICER"],
+      "escalationTime": "2 hours",
+      "requiresWrittenApproval": false
+    },
+    "ENHANCED_LASHING": {
+      "description": "Enhanced lashing requirements apply. Additional securing points or equipment required.",
+      "notificationTargets": ["CHIEF_OFFICER", "BOSUN"],
+      "escalationTime": "1 hour",
+      "requiresWrittenApproval": false
+    }
+  },
+  "approvalHierarchy": {
+    "MASTER": {
+      "level": 1,
+      "description": "Master of vessel - highest authority",
+      "canApprove": ["ALL"],
+      "notificationMethod": ["PHONE", "RADIO", "IN_PERSON"]
+    },
+    "CHIEF_OFFICER": {
+      "level": 2,
+      "description": "Chief Officer - cargo operations lead",
+      "canApprove": ["DG", "BC", "CS", "FUM", "PT", "VH"],
+      "notificationMethod": ["RADIO", "IN_PERSON", "SYSTEM"]
+    },
+    "SAFETY_OFFICER": {
+      "level": 2,
+      "description": "Safety Officer - HSE compliance",
+      "canApprove": ["ES", "FUM", "DG"],
+      "notificationMethod": ["RADIO", "IN_PERSON", "SYSTEM"]
+    },
+    "TERMINAL_SUPERINTENDENT": {
+      "level": 3,
+      "description": "Terminal representative",
+      "canApprove": ["BC", "CS"],
+      "notificationMethod": ["RADIO", "IN_PERSON"]
+    },
+    "BOATSWAIN": {
+      "level": 4,
+      "description": "Bosun - deck crew supervisor",
+      "canApprove": ["CS"],
+      "notificationMethod": ["RADIO", "IN_PERSON"]
+    },
+    "CHIEF_ENGINEER": {
+      "level": 3,
+      "description": "Chief Engineer - technical systems",
+      "canApprove": ["PT", "ES"],
+      "notificationMethod": ["PHONE", "RADIO"]
+    },
+    "PORT_AUTHORITY": {
+      "level": 0,
+      "description": "External authority - notification only",
+      "canApprove": [],
+      "notificationMethod": ["EMAIL", "PHONE"]
+    },
+    "PORT_EMERGENCY": {
+      "level": 0,
+      "description": "Emergency services - notification only",
+      "canApprove": [],
+      "notificationMethod": ["PHONE", "RADIO"]
+    }
+  },
+  "inspectionChecklists": {
+    "DG_INSPECTION": {
+      "items": [
+        "Verify IMDG Column 17 data complete (flashpoint, toxicity, physical state)",
+        "Confirm proper shipping name and UN number match",
+        "Inspect packaging condition and markings",
+        "Verify segregation requirements from other cargo",
+        "Check emergency response information available",
+        "Confirm shipper's declaration signed and valid"
+      ]
+    },
+    "BC_INSPECTION": {
+      "items": [
+        "Verify IMSBC 08-25 schedule applied",
+        "Confirm moisture content certificate valid and within limits",
+        "Check antioxidant treatment declaration (if applicable)",
+        "Verify cargo hold cleanliness and suitability",
+        "Confirm temperature monitoring equipment installed",
+        "Review loading rate restrictions"
+      ]
+    },
+    "FUMIGATION_INSPECTION": {
+      "items": [
+        "Verify fumigation certificate valid",
+        "Confirm seal integrity test passed",
+        "Check warning signs applied at all access points",
+        "Verify gas monitoring equipment calibrated",
+        "Confirm ventilation procedures documented",
+        "Check contractor approval status"
+      ]
+    },
+    "LASHING_INSPECTION": {
+      "items": [
+        "Verify lashing software v5.0 calculations",
+        "Confirm manual verification completed for heavy cargo",
+        "Inspect lashing equipment certification status",
+        "Check twistlock engagement",
+        "Verify tension on all lashing rods",
+        "Confirm CSM amendment incorporated"
+      ]
+    },
+    "ENCLOSED_SPACE_INSPECTION": {
+      "items": [
+        "Verify gas monitor calibration certificates",
+        "Confirm permit-to-work issued and valid",
+        "Check ventilation system operational",
+        "Verify rescue equipment staged",
+        "Confirm standby person assigned",
+        "Check communication system tested"
+      ]
+    }
+  },
+  "reportingRequirements": {
+    "triggeredInspection": {
+      "reportType": "FLAG_SYSTEM_INSPECTION_REPORT",
+      "fields": [
+        "triggerId",
+        "triggerName",
+        "containerNumber",
+        "voyageNumber",
+        "dateTime",
+        "actionTaken",
+        "inspectionResult",
+        "approvingOfficer",
+        "timeToResolution"
+      ],
+      "retentionPeriod": "5 years",
+      "submissionDeadline": "24 hours"
+    },
+    "monthlyStatistics": {
+      "reportType": "FLAG_SYSTEM_MONTHLY_SUMMARY",
+      "fields": [
+        "totalTriggers",
+        "triggersByCategory",
+        "triggersByAction",
+        "averageResolutionTime",
+        "repeatOffenders",
+        "portBreakdown"
+      ],
+      "retentionPeriod": "10 years",
+      "submissionDeadline": "5th of following month"
+    }
+  },
+  "systemConfiguration": {
+    "loggingEnabled": true,
+    "auditTrailRetention": "10 years",
+    "alertChannels": ["SYSTEM_UI", "EMAIL", "SMS", "RADIO"],
+    "integrationPoints": ["TOS", "PMS", "GAS_MONITORING", "XRAY_SCREENING"],
+    "failSafeMode": "HOLD_ON_ERROR",
+    "overrideRequiresMasterApproval": true
+  }
+}

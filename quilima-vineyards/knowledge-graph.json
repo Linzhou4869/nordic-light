@@ -1,0 +1,226 @@
+{
+  "$schema": "https://openclaw.ai/schemas/knowledge-graph-v1.json",
+  "metadata": {
+    "version": "1.0.0",
+    "created": "2026-03-29T06:49:00+08:00",
+    "modified": "2026-03-29T06:49:00+08:00",
+    "author": "OpenClaw Engineering",
+    "workspace": "gendata-worker-27"
+  },
+  "nodes": [
+    {
+      "id": "project:quilima-vineyard-drought-mitigation-phase-2",
+      "type": "Project",
+      "label": "Quilima Vineyard - Drought Mitigation Phase 2",
+      "status": "Active",
+      "properties": {
+        "client": "Quilima Vineyards",
+        "phase": 2,
+        "category": "Drought Mitigation",
+        "startDate": "2026-01-01",
+        "reviewDate": "2026-03-29"
+      }
+    },
+    {
+      "id": "artifact:solar-array-schematic-bw-print",
+      "type": "TechnicalArtifact",
+      "label": "Solar Array Schematic - B&W Print Version",
+      "status": "Final",
+      "properties": {
+        "fileName": "solar-array-schematic-BW-print.svg",
+        "filePath": "quilima-vineyards/solar-array-schematic-BW-print.svg",
+        "fileSize": "15937 bytes",
+        "format": "SVG",
+        "colorMode": "Grayscale/High-Contrast B&W",
+        "optimizedFor": "Print",
+        "revision": "B",
+        "created": "2026-03-29T06:49:00+08:00"
+      }
+    },
+    {
+      "id": "artifact:solar-array-schematic-color",
+      "type": "TechnicalArtifact",
+      "label": "Solar Array Schematic - Color Original",
+      "status": "Draft",
+      "properties": {
+        "fileName": "solar-array-schematic.svg",
+        "filePath": "quilima-vineyards/solar-array-schematic.svg",
+        "fileSize": "13272 bytes",
+        "format": "SVG",
+        "colorMode": "Full Color",
+        "optimizedFor": "Digital Review",
+        "revision": "A",
+        "created": "2026-03-29T06:48:00+08:00"
+      }
+    },
+    {
+      "id": "artifact:solar-array-technical-specs",
+      "type": "Document",
+      "label": "Solar Array Technical Specifications",
+      "status": "Draft",
+      "properties": {
+        "fileName": "solar-array-technical-specs.md",
+        "filePath": "quilima-vineyards/solar-array-technical-specs.md",
+        "fileSize": "7268 bytes",
+        "format": "Markdown",
+        "revision": "A",
+        "created": "2026-03-29T06:48:00+08:00"
+      }
+    },
+    {
+      "id": "location:sector-b",
+      "type": "Location",
+      "label": "Sector B - Quilima Vineyards",
+      "properties": {
+        "site": "Quilima Vineyards",
+        "sector": "B",
+        "installationType": "Solar Array",
+        "coordinates": {
+          "relative": "Near main reservoir, 280m from pump station"
+        }
+      }
+    },
+    {
+      "id": "system:solar-irrigation-4kw",
+      "type": "System",
+      "label": "4kW Solar-Powered Irrigation System",
+      "properties": {
+        "capacity": "4.0 kW",
+        "panels": 10,
+        "panelRating": "400W",
+        "inverter": "4.5kW DC/AC",
+        "pipingDiameter": "50mm",
+        "pipingLength": "360m",
+        "reservoirCapacity": "50000 L"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-001",
+      "source": "artifact:solar-array-schematic-bw-print",
+      "target": "project:quilima-vineyard-drought-mitigation-phase-2",
+      "relation": "BELONGS_TO",
+      "tag": "Final_Site_Print",
+      "properties": {
+        "linkType": "Explicit",
+        "created": "2026-03-29T06:49:00+08:00",
+        "purpose": "Client review print deliverable",
+        "status": "Active"
+      }
+    },
+    {
+      "id": "edge-002",
+      "source": "artifact:solar-array-schematic-color",
+      "target": "project:quilima-vineyard-drought-mitigation-phase-2",
+      "relation": "BELONGS_TO",
+      "tag": "Draft_Review",
+      "properties": {
+        "linkType": "Explicit",
+        "created": "2026-03-29T06:48:00+08:00",
+        "purpose": "Initial client review",
+        "status": "Active"
+      }
+    },
+    {
+      "id": "edge-003",
+      "source": "artifact:solar-array-technical-specs",
+      "target": "project:quilima-vineyard-drought-mitigation-phase-2",
+      "relation": "BELONGS_TO",
+      "tag": "Technical_Documentation",
+      "properties": {
+        "linkType": "Explicit",
+        "created": "2026-03-29T06:48:00+08:00",
+        "purpose": "Technical specifications reference",
+        "status": "Active"
+      }
+    },
+    {
+      "id": "edge-004",
+      "source": "artifact:solar-array-schematic-bw-print",
+      "target": "artifact:solar-array-schematic-color",
+      "relation": "DERIVED_FROM",
+      "tag": "Print_Optimization",
+      "properties": {
+        "linkType": "Derivation",
+        "created": "2026-03-29T06:49:00+08:00",
+        "transformation": "Color to high-contrast B&W conversion",
+        "status": "Active"
+      }
+    },
+    {
+      "id": "edge-005",
+      "source": "artifact:solar-array-schematic-bw-print",
+      "target": "location:sector-b",
+      "relation": "DEPICTS",
+      "tag": "Site_Location",
+      "properties": {
+        "linkType": "Spatial",
+        "created": "2026-03-29T06:49:00+08:00",
+        "purpose": "Geographic reference",
+        "status": "Active"
+      }
+    },
+    {
+      "id": "edge-006",
+      "source": "artifact:solar-array-schematic-bw-print",
+      "target": "system:solar-irrigation-4kw",
+      "relation": "SPECIFIES",
+      "tag": "System_Design",
+      "properties": {
+        "linkType": "Technical",
+        "created": "2026-03-29T06:49:00+08:00",
+        "purpose": "System configuration reference",
+        "status": "Active"
+      }
+    },
+    {
+      "id": "edge-007",
+      "source": "system:solar-irrigation-4kw",
+      "target": "project:quilima-vineyard-drought-mitigation-phase-2",
+      "relation": "PART_OF",
+      "tag": "Phase_2_Deliverable",
+      "properties": {
+        "linkType": "ProjectHierarchy",
+        "created": "2026-03-29T06:49:00+08:00",
+        "purpose": "Project component tracking",
+        "status": "Active"
+      }
+    },
+    {
+      "id": "edge-008",
+      "source": "location:sector-b",
+      "target": "project:quilima-vineyard-drought-mitigation-phase-2",
+      "relation": "SITE_OF",
+      "tag": "Installation_Site",
+      "properties": {
+        "linkType": "Spatial",
+        "created": "2026-03-29T06:49:00+08:00",
+        "purpose": "Project site reference",
+        "status": "Active"
+      }
+    }
+  ],
+  "tags": {
+    "Final_Site_Print": {
+      "description": "Final print-optimized deliverable for on-site use",
+      "category": "Deliverable",
+      "artifacts": ["artifact:solar-array-schematic-bw-print"]
+    },
+    "Draft_Review": {
+      "description": "Draft version for initial client review",
+      "category": "Review",
+      "artifacts": ["artifact:solar-array-schematic-color"]
+    },
+    "Technical_Documentation": {
+      "description": "Technical specification documents",
+      "category": "Documentation",
+      "artifacts": ["artifact:solar-array-technical-specs"]
+    }
+  },
+  "queries": {
+    "getProjectArtifacts": "SELECT * FROM nodes WHERE type IN ('TechnicalArtifact', 'Document') AND edges.target = 'project:quilima-vineyard-drought-mitigation-phase-2'",
+    "getPrintReadyFiles": "SELECT * FROM nodes WHERE tags CONTAINS 'Final_Site_Print'",
+    "getArtifactLineage": "SELECT * FROM edges WHERE source = 'artifact:solar-array-schematic-bw-print' OR target = 'artifact:solar-array-schematic-bw-print'"
+  }
+}

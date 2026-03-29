@@ -1,0 +1,68 @@
+// VIX Breach Execution Architecture
+digraph VIX_Breach_Flow {
+	dpi=150 rankdir=TB ratio=fill size="12,16"
+	node [fontname=Arial shape=box style=filled]
+	edge [fontname=Arial fontsize=10]
+	A [label="📊 CBOE Data Feed" fillcolor="#e3f2fd"]
+	B [label="Threshold Check
+(VIX > 18?)" fillcolor="#fff9c4" shape=diamond]
+	C [label="🚨 BREACH TRIGGERED" color="#c62828" fillcolor="#ffcdd2" penwidth=3 style="filled,bold"]
+	D [label="✅ Normal Operations" fillcolor="#c8e6c9"]
+	E [label="🔔 Alert System" fillcolor="#ffe0b2"]
+	F [label="Silence Audio Feed" fillcolor="#ffcc80"]
+	G [label="Log Breach Event" fillcolor="#ffe0b2"]
+	H [label="Notify Stakeholders" fillcolor="#ffe0b2"]
+	I [label="⚙️ Execution Engine" fillcolor="#e1bee7"]
+	J [label="Hedge Positions" fillcolor="#f8bbd9"]
+	M [label="Execute VIX Futures" fillcolor="#f48fb1"]
+	N [label="SPX Put Options" fillcolor="#f48fb1"]
+	O [label="Treasury Flight" fillcolor="#f48fb1"]
+	K [label="Risk Rebalancing" fillcolor="#f8bbd9"]
+	P [label="Reduce Equity Exposure" fillcolor="#f48fb1"]
+	Q [label="Increase Cash Reserve" fillcolor="#f48fb1"]
+	R [label="Activate Tail Hedges" fillcolor="#f48fb1"]
+	L [label="Liquidity Check" fillcolor="#f8bbd9"]
+	S [label="Counterparty Verification" fillcolor="#f48fb1"]
+	T [label="Margin Availability" fillcolor="#f48fb1"]
+	U [label="Settlement Readiness" fillcolor="#f48fb1"]
+	V [label="📝 Trade Confirmation" fillcolor="#b3e5fc"]
+	W [label="📤 Post to X/Twitter" fillcolor="#1da1f2" fontcolor=white]
+	X [label="📁 Archive to Workspace" fillcolor="#b3e5fc"]
+	Y [label="🔐 Audit Log" fillcolor="#b3e5fc"]
+	Z [label="✅ Execution Complete" fillcolor="#a5d6a7" style="filled,bold"]
+	A -> B [label="Live VIX Poll"]
+	B -> C [label="VIX > 18" color="#c62828" penwidth=2]
+	B -> D [label="VIX ≤ 18" color="#2e7d32"]
+	C -> E
+	E -> F
+	E -> G
+	E -> H
+	C -> I
+	I -> J
+	I -> K
+	I -> L
+	J -> M
+	J -> N
+	J -> O
+	K -> P
+	K -> Q
+	K -> R
+	L -> S
+	L -> T
+	L -> U
+	M -> V [style=dashed]
+	N -> V [style=dashed]
+	O -> V [style=dashed]
+	P -> V [style=dashed]
+	Q -> V [style=dashed]
+	R -> V [style=dashed]
+	S -> V [style=dashed]
+	T -> V [style=dashed]
+	U -> V [style=dashed]
+	V -> W
+	V -> X
+	V -> Y
+	W -> Z
+	X -> Z
+	Y -> Z
+}

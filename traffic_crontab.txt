@@ -1,0 +1,39 @@
+# Riverside District Traffic Impact Assessment - Cron Job
+# 
+# Schedule: Every Friday at 8:00 AM (local server time)
+# Purpose: Automatically analyze gate capacities and utilization percentages
+#          for North Gate, South Plaza, and East Connector access points
+# 
+# Exit Codes:
+#   0 = All gates within 80% threshold (no action needed)
+#   1 = One or more gates breach 80% threshold (attention required)
+#
+# ┌───────────── minute (0-59)
+# │ ┌───────────── hour (0-23)
+# │ │ ┌───────────── day of month (1-31)
+# │ │ │ ┌───────────── month (1-12)
+# │ │ │ │ ┌───────────── day of week (0-7, Sunday=0 or 7)
+# │ │ │ │ │
+# │ │ │ │ │
+# * * * * * command to execute
+#
+# ==============================================================================
+# INSTALLATION
+# ==============================================================================
+# To install this cron job:
+#   crontab /mnt/afs_toolcall/zhoulin3/.openclaw/workspaces/gendata-worker-27/traffic_crontab.txt
+#
+# To verify installation:
+#   crontab -l
+#
+# To view cron logs:
+#   grep CRON /var/log/syslog | grep traffic_impact
+#   # Or: journalctl -u cron | grep traffic_impact
+#
+# To remove this cron job:
+#   crontab -l | grep -v "traffic_impact_analysis.py" | crontab -
+#
+# ==============================================================================
+
+# Friday at 8:00 AM - Run traffic impact analysis
+0 8 * * 5 /usr/bin/python3 /mnt/afs_toolcall/zhoulin3/.openclaw/workspaces/gendata-worker-27/traffic_impact_analysis.py >> /mnt/afs_toolcall/zhoulin3/.openclaw/workspaces/gendata-worker-27/logs/traffic_impact_cron.log 2>&1

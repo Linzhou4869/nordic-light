@@ -1,0 +1,12 @@
+Subject: Vendor X Facial Recognition Audit.
+Date: October 15.
+
+Key Finding: A disparate impact ratio of 0.72 was observed in demographic subgroup testing.
+
+This indicates a significant accuracy disparity between Group A and Group B. Specifically, Group B's recognition accuracy is approximately 72% of Group A's performance, falling below the 0.8 threshold commonly used to identify adverse impact.
+
+Recommendation: Immediate pause on deployment until bias mitigation patch version 2.1 is validated.
+
+Further analysis is required to determine whether the disparity stems from training data representation, feature extraction biases, or threshold calibration issues.
+
+This concludes the briefing.

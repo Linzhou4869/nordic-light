@@ -1,0 +1,67 @@
+{
+  "query": {
+    "keywords": [
+      "CRISPR-Cas9",
+      "Plasmodium falciparum"
+    ],
+    "author": null,
+    "doi": null,
+    "start_date": "2026-01-01",
+    "end_date": "2026-06-30",
+    "category": null
+  },
+  "result_count": 3,
+  "results": [
+    {
+      "doi": "10.1101/2020.04.17.047217",
+      "title": "Discovery of Plasmodium falciparum SR12 as a GOLD-Domain seven transmembrane protein regulating GPCR trafficking in mammalian cells",
+      "authors": "Pereira, P. H. S.; Ahrari, S.; Kiyan, C. L.; Kobayashi, H.; Moraes, M.; Bouvier, M.; Garcia, C. R.",
+      "author_corresponding": "Michel  Bouvier",
+      "author_corresponding_institution": "University of Montreal",
+      "date": "2026-02-24",
+      "version": "2",
+      "type": "new results",
+      "license": "cc0_ng",
+      "category": "cell biology",
+      "jatsxml": "https://www.biorxiv.org/content/early/2026/02/24/2020.04.17.047217.source.xml",
+      "published": "NA",
+      "abstract": "Considered a significant public health issue, the growing resistance to conventional antimalarials necessitates the identification of new targets for drug development. Given that G protein-coupled receptors (GPCRs) are readily druggable targets, we explored the cellular role and potential structure of a GPCR-like protein identified in the P. falciparum genome, serpentine receptor 12 (SR12). Alphafold structure analysis, coupled with molecular dynamics simulations of SR12, revealed structural similarities to the Golgi dynamics domain (GOLD)-seven-transmembrane helix protein family (GOST proteins). This family of proteins, which includes TMEM87A and the orphan GPCRs GPR180, GPR107, and GPR108, is involved in subcellular trafficking. Consistent with such a trafficking role, SR12 is mainly present in the secretory pathway when expressed in mammalian cells. Co-expression of SR12 with GPCRs PAR1 and M3R led to increased plasma membrane targeting of these receptors. SR12 expression in HEK293 cells conferred Gq-dependent calcium signaling in response to the protease activated receptor 1 (PAR1) agonist thrombin. This response was completely abrogated in cells genetically devoid of PARs (PAR KO cells), consistent with its functions as a chaperone-like protein, promoting receptor trafficking to the plasma membrane. Taken together, the data show that the Plasmodium falciparum SR12 promotes GPCR trafficking when expressed in mammalian cells. Although the physiological consequences of such activity remain to be determined, the finding revealed the presence of a GOST protein in the parasite genome.",
+      "pdf_url": "https://www.biorxiv.org/content/10.1101/2020.04.17.047217v2.full.pdf",
+      "html_url": "https://www.biorxiv.org/content/10.1101/2020.04.17.047217v2"
+    },
+    {
+      "doi": "10.1101/2023.04.03.535384",
+      "title": "Simultaneous CRISPR-Cas9-induced double strand breaks are lethal in cancers",
+      "authors": "Teh, S. S. K.; Kotwal, A.; Bennett, A.; Halper-Stromberg, E.; Morsberger, L.; Zamani, S.; Shi, Y.; Skaist, A.; Zhu, Q.; Bowland, K.; Liang, H.; Hruban, R. H.; Hung, C.-F.; Anders, R. A.; Roberts, N. J.; Scharpf, R. B.; Goldstein, M.; Zou, Y. S.; Eshleman, J. R.",
+      "author_corresponding": "James R Eshleman",
+      "author_corresponding_institution": "The Johns Hopkins University School of Medicine",
+      "date": "2026-01-13",
+      "version": "2",
+      "type": "new results",
+      "license": "cc_by_nc",
+      "category": "cancer biology",
+      "jatsxml": "https://www.biorxiv.org/content/early/2026/01/13/2023.04.03.535384.source.xml",
+      "published": "NA",
+      "abstract": "While radiation is an effective oncologic therapy, killing cancer by inducing DNA double-strand breaks (DSBs), it lacks specificity for neoplastic cells. We have previously adapted the CRISPR-Cas9 gene-editing technology as a cancer-specific treatment modality targeting somatic mutations in pancreatic cancer (PC). However, its tumoricidal potential remains unclear, especially in comparison to therapeutic doses of radiation. Here, we demonstrate that CRISPR-Cas9-induced DSBs are more cytotoxic in PCs than a comparable number of radiation-induced DSBs. We observed >90% tumor growth inhibition by targeting 9 sites with cancer-specific single-guide RNAs (sgRNAs). Through both bioinformatics and cytogenetics analyses, we found that CRISPR-Cas9-induced DSBs triggered ongoing chromosomal rearrangements, with 87% of structural variants not directly produced from the initial CRISPR-Cas9-induced DSBs, and chromosomal instability (CIN) peaking before cell death. By comparing the cytotoxicity of CRISPR-Cas9- to radiation-induced DSBs, we demonstrate that the number of DSBs required to achieve equitoxic effects was [~]3 times higher for radiation than CRISPR-Cas9. Finally, we show that PC cells that had survived CRISPR-Cas9 targeting retained susceptibility to subsequent CRISPR-Cas9-induced DSBs at different genomic sites with >87% growth inhibition. Together, our data support the therapeutic potential of CRISPR-Cas9 as an anti-cancer strategy.",
+      "pdf_url": "https://www.biorxiv.org/content/10.1101/2023.04.03.535384v2.full.pdf",
+      "html_url": "https://www.biorxiv.org/content/10.1101/2023.04.03.535384v2"
+    },
+    {
+      "doi": "10.1101/2023.04.03.535384",
+      "title": "Simultaneous CRISPR-Cas9-induced double strand breaks are lethal in models of pancreatic cancer",
+      "authors": "Teh, S. S. K.; Kotwal, A.; Bennett, A.; Halper-Stromberg, E.; Morsberger, L.; Zamani, S.; Shi, Y.; Skaist, A.; Zhu, Q.; Bowland, K.; Liang, H.; Hruban, R. H.; Hung, C.-F.; Anders, R. A.; Roberts, N. J.; Scharpf, R. B.; Goldstein, M.; Zou, Y. S.; Eshleman, J. R.",
+      "author_corresponding": "James R Eshleman",
+      "author_corresponding_institution": "The Johns Hopkins University School of Medicine",
+      "date": "2026-03-12",
+      "version": "3",
+      "type": "new results",
+      "license": "cc_by_nc",
+      "category": "cancer biology",
+      "jatsxml": "https://www.biorxiv.org/content/early/2026/03/12/2023.04.03.535384.source.xml",
+      "published": "NA",
+      "abstract": "While radiation is an effective oncologic therapy, killing cancer by inducing DNA double-strand breaks (DSBs), it lacks specificity for neoplastic cells. We have previously adapted the CRISPR-Cas9 gene-editing technology as a cancer-specific treatment modality targeting somatic mutations in pancreatic cancer (PC). However, its tumoricidal potential remains unclear, especially in comparison to therapeutic doses of radiation. Here, we demonstrate that CRISPR-Cas9-induced DSBs are more cytotoxic in PCs than a comparable number of radiation-induced DSBs. We observed >90% tumor growth inhibition by targeting 9 sites with cancer-specific single-guide RNAs (sgRNAs). Through both bioinformatics and cytogenetics analyses, we found that CRISPR-Cas9-induced DSBs triggered ongoing chromosomal rearrangements, with 87% of structural variants not directly produced from the initial CRISPR-Cas9-induced DSBs, and chromosomal instability (CIN) peaking before cell death. By comparing the cytotoxicity of CRISPR-Cas9- to radiation-induced DSBs, we demonstrate that the number of DSBs required to achieve equitoxic effects was [~]3 times higher for radiation than CRISPR-Cas9. Finally, we show that PC cells that had survived CRISPR-Cas9 targeting retained susceptibility to subsequent CRISPR-Cas9-induced DSBs at different genomic sites with >87% growth inhibition. Together, our data support the therapeutic potential of CRISPR-Cas9 as an anti-cancer strategy.",
+      "pdf_url": "https://www.biorxiv.org/content/10.1101/2023.04.03.535384v3.full.pdf",
+      "html_url": "https://www.biorxiv.org/content/10.1101/2023.04.03.535384v3"
+    }
+  ]
+}

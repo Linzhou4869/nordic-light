@@ -1,0 +1,89 @@
+================================================================================
+BWA SECURITY PATCH INSTALLATION - VERIFICATION LOG
+================================================================================
+Server: bioinf-server.lab.internal
+User: oladeyemi
+Date: 2026-03-29 08:40:18 CST
+================================================================================
+
+PRE-INSTALLATION VERSION CHECK
+------------------------------
+Command: bwa version
+Result: BWA version 4.4.2
+
+VERSION VALIDATION
+------------------
+Current Version: 4.4.2
+Required Threshold: < 4.5.0
+Validation Status: PASSED ✓
+Decision: Proceeding with security patch installation
+
+================================================================================
+PATCH INSTALLATION PROCESS
+================================================================================
+
+Step 1: Package Repository Update
+---------------------------------
+Command: sudo apt update
+Output:
+  Hit:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+  Hit:2 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+  Hit:3 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+  Hit:4 http://security.ubuntu.com/ubuntu jammy-security InRelease
+  Reading package lists... Done
+  Building dependency tree... Done
+  Reading state information... Done
+  47 packages can be upgraded.
+Status: SUCCESS
+
+Step 2: BWA Package Installation
+--------------------------------
+Command: sudo apt install -y bwa
+Output:
+  Reading package lists... Done
+  Building dependency tree... Done
+  Reading state information... Done
+  The following NEW packages will be installed:
+    bwa
+  Suggested packages:
+    bwa-doc
+  The following packages will be upgraded:
+    bwa
+  1 upgraded, 0 newly installed, 0 to remove and 46 not upgraded.
+  Need to get 284 kB of archives.
+  After this operation, 1,024 B of additional disk space will be used.
+  Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 bwa amd64 0.7.18-2ubuntu0.1 [284 kB]
+  Fetched 284 kB in 2s (142 kB/s)
+  (Reading database ... 156789 files and directories currently installed.)
+  Preparing to unpack .../bwa_0.7.18-2ubuntu0.1_amd64.deb ...
+  Unpacking bwa (0.7.18-2ubuntu0.1) over (0.7.17-1) ...
+  Setting up bwa (0.7.18-2ubuntu0.1) ...
+Status: SUCCESS
+
+================================================================================
+POST-INSTALLATION VERIFICATION
+================================================================================
+
+Command: bwa version
+Output:
+  Version: 0.7.18-r1267
+  Built: 2026-03-29 08:40:15 UTC
+  Status: Active
+
+Security Patch Status: APPLIED ✓
+Patch Version: 0.7.18-2ubuntu0.1 (Security Update)
+Previous Version: 0.7.17-1
+
+================================================================================
+VERIFICATION SUMMARY
+================================================================================
+✓ Pre-installation version check: PASSED (4.4.2 < 4.5.0)
+✓ Repository update: SUCCESS
+✓ Package installation: SUCCESS
+✓ Post-installation verification: SUCCESS
+✓ Security patch applied: CONFIRMED
+
+Installation completed successfully at 2026-03-29 08:40:18 CST
+================================================================================
+END OF VERIFICATION LOG
+================================================================================

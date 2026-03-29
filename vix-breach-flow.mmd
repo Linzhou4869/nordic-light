@@ -1,0 +1,40 @@
+flowchart TD
+    A[📊 CBOE Data Feed] -->|Live VIX Poll| B{Threshold Check}
+    B -->|VIX > 18| C[🚨 BREACH TRIGGERED]
+    B -->|VIX ≤ 18| D[✅ Normal Operations]
+    
+    C --> E[🔔 Alert System]
+    E --> F[Silence Audio Feed]
+    E --> G[Log Breach Event]
+    E --> H[Notify Stakeholders]
+    
+    C --> I[⚙️ Execution Engine]
+    I --> J[Hedge Positions]
+    I --> K[Risk Rebalancing]
+    I --> L[Liquidity Check]
+    
+    J --> M[Execute VIX Futures]
+    J --> N[SPX Put Options]
+    J --> O[Treasury Flight]
+    
+    K --> P[Reduce Equity Exposure]
+    K --> Q[Increase Cash Reserve]
+    K --> R[Activate Tail Hedges]
+    
+    L --> S[Counterparty Verification]
+    L --> T[Margin Availability]
+    L --> U[Settlement Readiness]
+    
+    M & N & O & P & Q & R & S & T & U --> V[📝 Trade Confirmation]
+    V --> W[📤 Post to X/Twitter]
+    V --> X[📁 Archive to Workspace]
+    V --> Y[🔐 Audit Log]
+    
+    W --> Z[✅ Execution Complete]
+    X --> Z
+    Y --> Z
+    
+    style C fill:#ff4444,color:#fff,stroke:#cc0000,stroke-width:3px
+    style F fill:#ff6600,color:#fff
+    style W fill:#1da1f2,color:#fff
+    style Z fill:#00cc66,color:#fff

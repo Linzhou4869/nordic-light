@@ -1,0 +1,1001 @@
+{
+  "vessel": {
+    "id": "OPS-LISBON-VESSEL-908",
+    "name": "ATLANTIC PIONEER",
+    "imo": "9456782",
+    "mmsi": "255806908",
+    "callSign": "CQXB",
+    "flag": "Portugal",
+    "type": "Container Ship",
+    "dwt": 89500,
+    "teu": 8500,
+    "built": 2018,
+    "builder": "Hyundai Heavy Industries",
+    "owner": "Atlantic Maritime Holdings Ltd.",
+    "operator": "EuroContainer Lines",
+    "classificationSociety": "LR",
+    "dataGenerated": "2026-03-29",
+    "coveragePeriod": {
+      "from": "2024-03-01",
+      "to": "2026-02-28"
+    }
+  },
+  "incidentLog": [
+    {
+      "incidentId": "INC-908-2024-001",
+      "date": "2024-03-15",
+      "time": "14:30",
+      "location": "Port of Rotterdam, Berth ECT Delta",
+      "category": "Cargo Securing",
+      "severity": "Minor",
+      "title": "Container Lashing Failure - Stack Collapse",
+      "description": "During heavy weather transit from Hamburg to Rotterdam, 3 containers in bay 42 experienced lashing rod failure. One 40ft container shifted approximately 15cm. No cargo damage reported. Discovered during pre-arrival inspection.",
+      "affectedCargo": ["MSCU7845621", "MSCU7845622", "TEMU9234567"],
+      "rootCause": "Inadequate tension on lashing rods; possible fatigue in turnbuckle assembly",
+      "correctiveAction": "Re-secured all affected containers; replaced damaged lashing equipment; crew retrained on lashing inspection procedures",
+      "reportedTo": "Port State Control Rotterdam, Classification Society",
+      "status": "Closed",
+      "investigationRef": "LR-INC-2024-0892"
+    },
+    {
+      "incidentId": "INC-908-2024-002",
+      "date": "2024-04-22",
+      "time": "08:15",
+      "location": "At Sea - North Atlantic (45N 32W)",
+      "category": "Fumigation Safety",
+      "severity": "Serious",
+      "title": "Phosphine Gas Detection - Cargo Hold 3",
+      "description": "During routine gas monitoring, elevated phosphine levels detected in cargo hold 3 (12 ppm). Hold was fumigated at departure from Santos for grain cargo. Ventilation system activated immediately. No personnel exposure.",
+      "affectedCargo": ["Bulk grain - 15000 MT wheat"],
+      "rootCause": "Fumigation seals degraded; insufficient hold sealing prior to departure",
+      "correctiveAction": "Emergency ventilation for 48 hours; fumigation contractor reviewed; new sealing procedures implemented",
+      "reportedTo": "Flag State, Next Port Authority (Le Havre), IMO Fumigation Database",
+      "status": "Closed",
+      "investigationRef": "PT-MA-2024-0156"
+    },
+    {
+      "incidentId": "INC-908-2024-003",
+      "date": "2024-05-08",
+      "time": "22:45",
+      "location": "Port of Le Havre, Terminal GMP",
+      "category": "Dangerous Goods",
+      "severity": "Moderate",
+      "title": "Undeclared Dangerous Goods Discovery",
+      "description": "During random container inspection, lithium batteries (Class 9) found in container declared as 'General Merchandise - Textiles'. Container originated from shipper in Shanghai.",
+      "affectedCargo": ["CSLU4567890"],
+      "rootCause": "Shipper declaration error; possible intentional misdeclaration",
+      "correctiveAction": "Container quarantined; proper DG documentation obtained; shipper reported to authorities; enhanced screening implemented",
+      "reportedTo": "French Customs, DGAC, Flag State",
+      "status": "Closed",
+      "investigationRef": "FR-DG-2024-0445"
+    },
+    {
+      "incidentId": "INC-908-2024-004",
+      "date": "2024-06-30",
+      "time": "03:20",
+      "location": "Suez Canal Transit",
+      "category": "Navigation",
+      "severity": "Minor",
+      "title": "Pilot Ladder Non-Compliance",
+      "description": "During Suez Canal pilot embarkation, pilot observed that pilot ladder step spacing did not meet SOLAS requirements. Pilot refused transfer until replacement ladder deployed.",
+      "affectedCargo": [],
+      "rootCause": "Worn pilot ladder not identified during last inspection; ladder exceeded service life",
+      "correctiveAction": "Ladder replaced immediately; all pilot transfer equipment inspected; new inspection checklist implemented per MSC circular",
+      "reportedTo": "Suez Canal Authority, Flag State",
+      "status": "Closed",
+      "investigationRef": "EG-SCA-2024-0789"
+    },
+    {
+      "incidentId": "INC-908-2024-005",
+      "date": "2024-08-14",
+      "time": "16:00",
+      "location": "Port of Singapore, PSA Terminal",
+      "category": "Cargo Securing",
+      "severity": "Moderate",
+      "title": "Twistlock Failure During Discharge",
+      "description": "Automated twistlock failed to release during container discharge operation. Container suspended approximately 2m above vessel deck for 45 minutes before manual release.",
+      "affectedCargo": ["TGHU8901234"],
+      "rootCause": "Mechanical failure in automated twistlock mechanism; manufacturing defect suspected",
+      "correctiveAction": "All twistlocks from same batch inspected; supplier notified; manual backup procedures reinforced",
+      "reportedTo": "MPA Singapore, Classification Society",
+      "status": "Closed",
+      "investigationRef": "SG-PSA-2024-1203"
+    },
+    {
+      "incidentId": "INC-908-2024-006",
+      "date": "2024-09-25",
+      "time": "11:30",
+      "location": "Port of Colombo",
+      "category": "Enclosed Space Entry",
+      "severity": "Serious",
+      "title": "Oxygen Deficiency - Ballast Tank Entry",
+      "description": "During ballast tank inspection, oxygen level dropped to 18.5% during entry. Two crew members evacuated immediately. No injuries. Entry permit was valid but ventilation was insufficient.",
+      "affectedCargo": [],
+      "rootCause": "Inadequate ventilation during entry; gas monitoring frequency insufficient",
+      "correctiveAction": "Enhanced ventilation procedures; continuous gas monitoring implemented; crew retrained per revised A.1050(27)",
+      "reportedTo": "Flag State, Port State Control",
+      "status": "Closed",
+      "investigationRef": "LK-MA-2024-0567"
+    },
+    {
+      "incidentId": "INC-908-2024-007",
+      "date": "2024-11-03",
+      "time": "09:45",
+      "location": "Port of Durban",
+      "category": "Cargo Declaration",
+      "severity": "Moderate",
+      "title": "IMSBC Schedule Mismatch - Direct Reduced Iron",
+      "description": "DRI cargo shipped with incorrect IMSBC schedule reference. Cargo declared under old schedule; new amendments (08-25) not applied. Moisture content certification incomplete.",
+      "affectedCargo": ["Bulk DRI - 25000 MT"],
+      "rootCause": "Shipper unaware of updated IMSBC requirements; port facility not updated on new schedules",
+      "correctiveAction": "Cargo re-sampled and re-certified; updated documentation obtained; shipper educated on IMSBC amendments",
+      "reportedTo": "South African Maritime Safety Authority",
+      "status": "Closed",
+      "investigationRef": "ZA-SAMSA-2024-0890"
+    },
+    {
+      "incidentId": "INC-908-2024-008",
+      "date": "2024-12-18",
+      "time": "05:15",
+      "location": "At Sea - Indian Ocean",
+      "category": "Cargo Securing",
+      "severity": "Minor",
+      "title": "Lashing Software Discrepancy",
+      "description": "Cargo securing manual calculations did not match lashing software output for heavy machinery cargo. Discrepancy of 12% in calculated forces.",
+      "affectedCargo": ["Heavy machinery - 8 units in bay 28"],
+      "rootCause": "Lashing software using outdated parameters; CSM not updated with latest software version",
+      "correctiveAction": "Software updated; calculations verified by chief officer; manual verification protocol established",
+      "reportedTo": "Classification Society",
+      "status": "Closed",
+      "investigationRef": "LR-SW-2024-0234"
+    },
+    {
+      "incidentId": "INC-908-2025-001",
+      "date": "2025-01-22",
+      "time": "13:20",
+      "location": "Port of Antwerp",
+      "category": "Dangerous Goods",
+      "severity": "Serious",
+      "title": "IMDG Column 17 Information Missing",
+      "description": "Multiple containers with chemicals lacked required Column 17 information on shipping documents (flashpoint, toxicity level). Discovered during document check.",
+      "affectedCargo": ["12 containers - various chemicals"],
+      "rootCause": "Shipper documentation incomplete; freight forwarder not aware of updated IMDG requirements",
+      "correctiveAction": "All documentation corrected before loading; freight forwarder training required; enhanced document verification",
+      "reportedTo": "Belgian Customs, Flag State",
+      "status": "Closed",
+      "investigationRef": "BE-DOUANE-2025-0123"
+    },
+    {
+      "incidentId": "INC-908-2025-002",
+      "date": "2025-02-14",
+      "time": "19:30",
+      "location": "Port of Hamburg, Burchardkai",
+      "category": "Cargo Securing",
+      "severity": "Moderate",
+      "title": "Container Stack Weight Exceeded",
+      "category2": "Stowage Planning",
+      "description": "During loading, container stack weight exceeded bay limit by 8 tonnes. Discovered by terminal software. Loading sequence had to be re-planned causing 4-hour delay.",
+      "affectedCargo": ["Multiple containers - bay 56"],
+      "rootCause": "Stowage plan not properly validated; weight verification step skipped",
+      "correctiveAction": "Stowage plan re-validated; weight verification mandatory step added; terminal software integration improved",
+      "reportedTo": "Terminal Operator, Vessel Operator",
+      "status": "Closed",
+      "investigationRef": "DE-HHLA-2025-0456"
+    },
+    {
+      "incidentId": "INC-908-2025-003",
+      "date": "2025-03-30",
+      "time": "07:45",
+      "location": "Port of Algeciras",
+      "category": "Fumigation Safety",
+      "severity": "Minor",
+      "title": "Fumigation Warning Sign Missing",
+      "description": "Container with fumigated cargo lacked proper warning signs at all access points. Discovered during pre-loading inspection.",
+      "affectedCargo": ["CSLU7654321 - Fumigated leather goods"],
+      "rootCause": "Terminal staff failed to apply warning signs after fumigation",
+      "correctiveAction": "Signs applied; container isolated until proper ventilation confirmed; terminal staff retrained",
+      "reportedTo": "Port Authority",
+      "status": "Closed",
+      "investigationRef": "ES-APBA-2025-0234"
+    },
+    {
+      "incidentId": "INC-908-2025-004",
+      "date": "2025-05-12",
+      "time": "15:00",
+      "location": "At Sea - Mediterranean",
+      "category": "Emergency Equipment",
+      "severity": "Moderate",
+      "title": "Free-Fall Lifeboat Release Mechanism Defect",
+      "description": "During monthly inspection, free-fall lifeboat release mechanism showed signs of corrosion and incomplete engagement. Simulated launch test failed.",
+      "affectedCargo": [],
+      "rootCause": "Inadequate maintenance; saltwater ingress into release mechanism",
+      "correctiveAction": "Release mechanism replaced; all lifeboat systems inspected; maintenance schedule enhanced per MSC circular requirements",
+      "reportedTo": "Flag State, Classification Society",
+      "status": "Closed",
+      "investigationRef": "PT-MA-2025-0678"
+    },
+    {
+      "incidentId": "INC-908-2025-005",
+      "date": "2025-06-28",
+      "time": "10:30",
+      "location": "Port of Piraeus",
+      "category": "Cargo Declaration",
+      "severity": "Serious",
+      "title": "Fish Meal Cargo - Self-Heating Risk Undeclared",
+      "description": "Fish meal cargo shipped without antioxidant treatment declaration. Cargo began self-heating during voyage from Peru. Temperature monitoring detected rise to 55°C.",
+      "affectedCargo": ["Bulk fish meal - 18000 MT"],
+      "rootCause": "Shipper failed to declare antioxidant treatment status; IMSBC schedule requirements not followed",
+      "correctiveAction": "Emergency ventilation; cargo temperature monitored continuously; port authorities notified; cargo rejected at destination",
+      "reportedTo": "Greek Coast Guard, Flag State, IMO",
+      "status": "Closed",
+      "investigationRef": "GR-HCG-2025-0890"
+    },
+    {
+      "incidentId": "INC-908-2025-006",
+      "date": "2025-08-05",
+      "time": "21:15",
+      "location": "Port of Jeddah",
+      "category": "Pilot Transfer",
+      "severity": "Moderate",
+      "title": "Pilot Hoist Found in Use",
+      "description": "Vessel found using mechanical pilot hoist during pilot embarkation. Pilot refused transfer. Hoist removed and proper ladder arrangements deployed.",
+      "affectedCargo": [],
+      "rootCause": "Chief officer unaware of SOLAS V/23 amendments prohibiting mechanical pilot hoists",
+      "correctiveAction": "Hoist permanently removed; new pilot transfer arrangements installed; crew trained on SOLAS amendments",
+      "reportedTo": "Saudi Ports Authority, Flag State",
+      "status": "Closed",
+      "investigationRef": "SA-SPA-2025-0567"
+    },
+    {
+      "incidentId": "INC-908-2025-007",
+      "date": "2025-09-19",
+      "time": "04:30",
+      "location": "At Sea - South China Sea",
+      "category": "Security",
+      "severity": "Moderate",
+      "title": "Suspicious Vessel Approach - Piracy Alert",
+      "description": "Two small craft approached vessel at high speed in known piracy area. BMP5 procedures activated. Vessel increased speed, deployed fire hoses. Craft broke off after 20 minutes.",
+      "affectedCargo": [],
+      "rootCause": "Transit through high-risk area despite piracy advisories",
+      "correctiveAction": "Route adjusted; MSCHOA notified; armed security team embarked at next port",
+      "reportedTo": "MSCHOA, UKMTO, Flag State",
+      "status": "Closed",
+      "investigationRef": "UK-MSCHOA-2025-1234"
+    },
+    {
+      "incidentId": "INC-908-2025-008",
+      "date": "2025-10-25",
+      "time": "12:00",
+      "location": "Port of Shanghai",
+      "category": "Cargo Securing",
+      "severity": "Minor",
+      "title": "Lashing Rod Thread Damage",
+      "description": "Multiple lashing rods found with damaged threads during pre-loading inspection. Equipment removed from service.",
+      "affectedCargo": [],
+      "rootCause": "Normal wear and tear; inspection interval exceeded",
+      "correctiveAction": "All lashing equipment inspected; damaged equipment replaced; inspection interval reduced to 6 months",
+      "reportedTo": "Classification Society",
+      "status": "Closed",
+      "investigationRef": "LR-EQ-2025-0789"
+    },
+    {
+      "incidentId": "INC-908-2025-009",
+      "date": "2025-11-30",
+      "time": "08:45",
+      "location": "Port of Los Angeles",
+      "category": "Dangerous Goods",
+      "severity": "Moderate",
+      "title": "Lithium Battery Fire Risk - Improper Packaging",
+      "description": "Container with lithium batteries found with damaged packaging and some batteries showing signs of thermal runaway. Container isolated on deck.",
+      "affectedCargo": ["MSCU3456789"],
+      "rootCause": "Inadequate packaging for lithium battery transport; IMDG Code packing instructions not followed",
+      "correctiveAction": "Container isolated and monitored; fire department standby; cargo offloaded for re-packaging; shipper penalized",
+      "reportedTo": "US Coast Guard, PHMSA",
+      "status": "Closed",
+      "investigationRef": "US-CG-2025-2345"
+    },
+    {
+      "incidentId": "INC-908-2026-001",
+      "date": "2026-01-15",
+      "time": "16:20",
+      "location": "Port of Felixstowe",
+      "category": "Cargo Declaration",
+      "severity": "Minor",
+      "title": "New IMSBC Schedule Not Applied - Zinc Slag",
+      "description": "Zinc slag cargo shipped under old generic schedule instead of new specific schedule from IMSBC 08-25 amendments.",
+      "affectedCargo": ["Bulk zinc slag - 12000 MT"],
+      "rootCause": "Port facility and shipper not updated on new IMSBC schedules effective Jan 2026",
+      "correctiveAction": "Documentation updated; cargo re-classified under new schedule; shipper educated",
+      "reportedTo": "UK MCA",
+      "status": "Closed",
+      "investigationRef": "UK-MCA-2026-0123"
+    },
+    {
+      "incidentId": "INC-908-2026-002",
+      "date": "2026-02-08",
+      "time": "11:00",
+      "location": "Port of Valencia",
+      "category": "Enclosed Space Entry",
+      "severity": "Minor",
+      "title": "Gas Monitor Calibration Expired",
+      "description": "During routine audit, portable gas monitors found with expired calibration certificates. Equipment removed from service.",
+      "affectedCargo": [],
+      "rootCause": "Calibration schedule not properly tracked; responsible officer changed without proper handover",
+      "correctiveAction": "All gas monitors recalibrated; calibration tracking system implemented; spare equipment procured",
+      "reportedTo": "Flag State",
+      "status": "Open",
+      "investigationRef": "PT-MA-2026-0089"
+    }
+  ],
+  "maintenanceReports": [
+    {
+      "reportId": "MNT-908-2024-Q2",
+      "period": "2024-04-01 to 2024-06-30",
+      "type": "Quarterly Maintenance Report",
+      "location": "Various Ports",
+      "items": [
+        {
+          "system": "Cargo Lashing Equipment",
+          "workPerformed": "Inspection of 2400 lashing rods, 800 turnbuckles, 400 lashing bridges",
+          "findings": "12 lashing rods with thread damage replaced; 8 turnbuckles with seized mechanisms replaced",
+          "cost": 45000,
+          "currency": "EUR"
+        },
+        {
+          "system": "Pilot Transfer Arrangements",
+          "workPerformed": "Annual inspection and certification",
+          "findings": "Pilot ladder replaced (wear); manropes renewed; stowage area lighting upgraded",
+          "cost": 12000,
+          "currency": "EUR"
+        },
+        {
+          "system": "Gas Detection System",
+          "workPerformed": "Calibration of all portable and fixed gas detectors",
+          "findings": "2 sensors replaced; system certified for enclosed space entry",
+          "cost": 8500,
+          "currency": "EUR"
+        },
+        {
+          "system": "Cargo Hold Ventilation",
+          "workPerformed": "Fan motor inspection; duct cleaning",
+          "findings": "Hold 3 fan motor bearing replaced; ventilation dampers serviced",
+          "cost": 22000,
+          "currency": "EUR"
+        }
+      ],
+      "totalCost": 87500,
+      "currency": "EUR",
+      "completedBy": "Chief Engineer Silva",
+      "verifiedBy": "Classification Society LR"
+    },
+    {
+      "reportId": "MNT-908-2024-Q3",
+      "period": "2024-07-01 to 2024-09-30",
+      "type": "Quarterly Maintenance Report",
+      "location": "Singapore, Colombo",
+      "items": [
+        {
+          "system": "Twistlock Systems",
+          "workPerformed": "Automated twistlock inspection and testing",
+          "findings": "15 twistlocks from suspect batch replaced; manual backup systems verified",
+          "cost": 67000,
+          "currency": "EUR"
+        },
+        {
+          "system": "Ballast Tank Coatings",
+          "workPerformed": "Internal inspection of ballast tanks 1P, 1S, 2P, 2S",
+          "findings": "Minor coating degradation in tank 2S; touch-up completed; anodes replaced",
+          "cost": 34000,
+          "currency": "EUR"
+        },
+        {
+          "system": "Life-Saving Appliances",
+          "workPerformed": "Lifeboat release mechanism inspection; life raft servicing",
+          "findings": "Free-fall release mechanism showed early wear; scheduled for replacement",
+          "cost": 15000,
+          "currency": "EUR"
+        }
+      ],
+      "totalCost": 116000,
+      "currency": "EUR",
+      "completedBy": "Chief Engineer Silva",
+      "verifiedBy": "Classification Society LR"
+    },
+    {
+      "reportId": "MNT-908-2024-Q4",
+      "period": "2024-10-01 to 2024-12-31",
+      "type": "Quarterly Maintenance Report",
+      "location": "Durban, Hamburg",
+      "items": [
+        {
+          "system": "Cargo Lashing Equipment",
+          "workPerformed": "Semi-annual lashing equipment certification",
+          "findings": "28 lashing rods condemned; 150 lashing plates inspected and certified",
+          "cost": 38000,
+          "currency": "EUR"
+        },
+        {
+          "system": "Lashing Software System",
+          "workPerformed": "Software update and parameter verification",
+          "findings": "Updated to version 4.2.1; all cargo securing calculations re-validated",
+          "cost": 12000,
+          "currency": "EUR"
+        },
+        {
+          "system": "Enclosed Space Entry Equipment",
+          "workPerformed": "Tripod inspection; rescue winch testing; BA set servicing",
+          "findings": "All equipment certified; new BA sets procured per revised requirements",
+          "cost": 45000,
+          "currency": "EUR"
+        }
+      ],
+      "totalCost": 95000,
+      "currency": "EUR",
+      "completedBy": "Chief Engineer Santos",
+      "verifiedBy": "Classification Society LR"
+    },
+    {
+      "reportId": "MNT-908-2025-Q1",
+      "period": "2025-01-01 to 2025-03-31",
+      "type": "Quarterly Maintenance Report",
+      "location": "Antwerp, Algeciras",
+      "items": [
+        {
+          "system": "Pilot Transfer Arrangements",
+          "workPerformed": "Complete replacement per SOLAS V/23 amendments",
+          "findings": "New ladder system installed; mechanical hoist removed; lighting upgraded",
+          "cost": 85000,
+          "currency": "EUR"
+        },
+        {
+          "system": "Dangerous Goods Storage",
+          "workPerformed": "DG container bay inspection; fire detection system upgrade",
+          "findings": "Fire detection heads replaced; segregation templates updated for IMDG 43-26",
+          "cost": 28000,
+          "currency": "EUR"
+        },
+        {
+          "system": "Cargo Hold Fire Suppression",
+          "workPerformed": "Fixed CO2 system inspection and certification",
+          "findings": "System certified; CO2 bottles weighed and refilled as needed",
+          "cost": 42000,
+          "currency": "EUR"
+        }
+      ],
+      "totalCost": 155000,
+      "currency": "EUR",
+      "completedBy": "Chief Engineer Santos",
+      "verifiedBy": "Classification Society LR"
+    },
+    {
+      "reportId": "MNT-908-2025-Q2",
+      "period": "2025-04-01 to 2025-06-30",
+      "type": "Quarterly Maintenance Report",
+      "location": "Piraeus, Suez Canal",
+      "items": [
+        {
+          "system": "Lifeboat Release Mechanisms",
+          "workPerformed": "Complete replacement of free-fall lifeboat release system",
+          "findings": "New system installed per MSC.1/Circ.1630/Rev.3 requirements",
+          "cost": 125000,
+          "currency": "EUR"
+        },
+        {
+          "system": "Rescue Boat",
+          "workPerformed": "Engine overhaul; davit inspection; release gear testing",
+          "findings": "Engine reconditioned; release gear certified per MSC.1/Circ.1693",
+          "cost": 38000,
+          "currency": "EUR"
+        },
+        {
+          "system": "Cargo Securing Manual",
+          "workPerformed": "CSM update with new lashing software parameters",
+          "findings": "Manual revised; new performance standards incorporated",
+          "cost": 8000,
+          "currency": "EUR"
+        }
+      ],
+      "totalCost": 171000,
+      "currency": "EUR",
+      "completedBy": "Chief Engineer Santos",
+      "verifiedBy": "Classification Society LR"
+    },
+    {
+      "reportId": "MNT-908-2025-Q3",
+      "period": "2025-07-01 to 2025-09-30",
+      "type": "Quarterly Maintenance Report",
+      "location": "Jeddah, Shanghai",
+      "items": [
+        {
+          "system": "Cargo Lashing Equipment",
+          "workPerformed": "Annual lashing equipment replacement program",
+          "findings": "45 lashing rods replaced; 200 turnbuckles serviced; 50 lashing plates renewed",
+          "cost": 72000,
+          "currency": "EUR"
+        },
+        {
+          "system": "Remote Inspection Equipment",
+          "workPerformed": "Drone system procurement and crew training",
+          "findings": "DJI M300 RTK procured; 3 crew members certified for RIT operations",
+          "cost": 35000,
+          "currency": "EUR"
+        },
+        {
+          "system": "Accommodation Ladder",
+          "workPerformed": "Overhaul per MSC.1/Circ.1331/Rev.1",
+          "findings": "Wire ropes replaced; safety nets renewed; hydraulic system serviced",
+          "cost": 28000,
+          "currency": "EUR"
+        }
+      ],
+      "totalCost": 135000,
+      "currency": "EUR",
+      "completedBy": "Chief Engineer Costa",
+      "verifiedBy": "Classification Society LR"
+    },
+    {
+      "reportId": "MNT-908-2025-Q4",
+      "period": "2025-10-01 to 2025-12-31",
+      "type": "Quarterly Maintenance Report",
+      "location": "Los Angeles, Felixstowe",
+      "items": [
+        {
+          "system": "Gas Detection System",
+          "workPerformed": "Complete system overhaul; new sensors installed",
+          "findings": "All fixed and portable detectors replaced with new calibrated units",
+          "cost": 52000,
+          "currency": "EUR"
+        },
+        {
+          "system": "Emergency Towing Arrangements",
+          "workPerformed": "Installation per MSC.1/Circ.1691",
+          "findings": "New towing pennants installed; chafing gear renewed; procedures updated",
+          "cost": 45000,
+          "currency": "EUR"
+        },
+        {
+          "system": "Lifting Appliances",
+          "workPerformed": "Annual certification per MSC.1/Circ.1696",
+          "findings": "All cranes and lifting equipment load tested; documentation updated",
+          "cost": 38000,
+          "currency": "EUR"
+        }
+      ],
+      "totalCost": 135000,
+      "currency": "EUR",
+      "completedBy": "Chief Engineer Costa",
+      "verifiedBy": "Classification Society LR"
+    },
+    {
+      "reportId": "MNT-908-2026-Q1",
+      "period": "2026-01-01 to 2026-02-28",
+      "type": "Partial Quarterly Report",
+      "location": "Valencia, Rotterdam",
+      "items": [
+        {
+          "system": "Gas Monitor Calibration",
+          "workPerformed": "Emergency recalibration program",
+          "findings": "All portable monitors recalibrated; tracking system implemented",
+          "cost": 18000,
+          "currency": "EUR"
+        },
+        {
+          "system": "IMSBC Code Compliance",
+          "workPerformed": "Cargo hold modifications for new bulk cargo schedules",
+          "findings": "Temperature monitoring probes installed; ventilation upgraded",
+          "cost": 65000,
+          "currency": "EUR"
+        },
+        {
+          "system": "Lashing Software",
+          "workPerformed": "Update to version 5.0 with harmonized performance standards",
+          "findings": "Software updated; CSM cross-verification completed",
+          "cost": 15000,
+          "currency": "EUR"
+        }
+      ],
+      "totalCost": 98000,
+      "currency": "EUR",
+      "completedBy": "Chief Engineer Costa",
+      "verifiedBy": "Classification Society LR - Pending"
+    }
+  ],
+  "cargoManifests": [
+    {
+      "voyageNumber": "ECL-2024-042E",
+      "date": "2024-03-15",
+      "route": "Hamburg - Rotterdam - Le Havre",
+      "totalContainers": 6842,
+      "totalTEU": 8234,
+      "totalWeight": 78500,
+      "weightUnit": "MT",
+      "dangerousGoods": 145,
+      "reeferContainers": 320,
+      "specialCargo": [
+        {
+          "type": "Project Cargo",
+          "description": "Wind turbine components",
+          "bays": [28, 29, 30],
+          "weight": 2400,
+          "weightUnit": "MT",
+          "securingMethod": "Custom lashing bridges"
+        }
+      ],
+      "incidents": ["INC-908-2024-001"],
+      "portStateInspections": 1,
+      "deficiencies": 0
+    },
+    {
+      "voyageNumber": "ECL-2024-048W",
+      "date": "2024-04-22",
+      "route": "Santos - Le Havre - Hamburg",
+      "totalContainers": 5234,
+      "totalTEU": 6890,
+      "totalWeight": 65200,
+      "weightUnit": "MT",
+      "dangerousGoods": 89,
+      "reeferContainers": 450,
+      "bulkCargo": [
+        {
+          "type": "Wheat",
+          "hold": "Hold 3",
+          "weight": 15000,
+          "weightUnit": "MT",
+          "fumigation": "Phosphine",
+          "fumigationDate": "2024-04-20"
+        }
+      ],
+      "incidents": ["INC-908-2024-002"],
+      "portStateInspections": 1,
+      "deficiencies": 1,
+      "deficiencyDetails": "Fumigation sealing inadequate"
+    },
+    {
+      "voyageNumber": "ECL-2024-055E",
+      "date": "2024-05-08",
+      "route": "Shanghai - Singapore - Rotterdam",
+      "totalContainers": 7456,
+      "totalTEU": 8890,
+      "totalWeight": 82300,
+      "weightUnit": "MT",
+      "dangerousGoods": 234,
+      "reeferContainers": 280,
+      "incidents": ["INC-908-2024-003"],
+      "portStateInspections": 2,
+      "deficiencies": 1,
+      "deficiencyDetails": "Undeclared DG - lithium batteries"
+    },
+    {
+      "voyageNumber": "ECL-2024-063E",
+      "date": "2024-06-30",
+      "route": "Singapore - Suez - Rotterdam",
+      "totalContainers": 6123,
+      "totalTEU": 7456,
+      "totalWeight": 71200,
+      "weightUnit": "MT",
+      "dangerousGoods": 167,
+      "reeferContainers": 310,
+      "incidents": ["INC-908-2024-004"],
+      "portStateInspections": 1,
+      "deficiencies": 1,
+      "deficiencyDetails": "Pilot ladder non-compliance"
+    },
+    {
+      "voyageNumber": "ECL-2024-071W",
+      "date": "2024-08-14",
+      "route": "Rotterdam - Singapore - Shanghai",
+      "totalContainers": 5890,
+      "totalTEU": 7123,
+      "totalWeight": 68900,
+      "weightUnit": "MT",
+      "dangerousGoods": 145,
+      "reeferContainers": 290,
+      "incidents": ["INC-908-2024-005"],
+      "portStateInspections": 1,
+      "deficiencies": 0
+    },
+    {
+      "voyageNumber": "ECL-2024-078E",
+      "date": "2024-09-25",
+      "route": "Colombo - Suez - Hamburg",
+      "totalContainers": 6234,
+      "totalTEU": 7567,
+      "totalWeight": 72100,
+      "weightUnit": "MT",
+      "dangerousGoods": 178,
+      "reeferContainers": 260,
+      "incidents": ["INC-908-2024-006"],
+      "portStateInspections": 1,
+      "deficiencies": 1,
+      "deficiencyDetails": "Enclosed space entry procedures"
+    },
+    {
+      "voyageNumber": "ECL-2024-085W",
+      "date": "2024-11-03",
+      "route": "Hamburg - Durban - Melbourne",
+      "totalContainers": 5678,
+      "totalTEU": 6890,
+      "totalWeight": 66500,
+      "weightUnit": "MT",
+      "dangerousGoods": 123,
+      "reeferContainers": 340,
+      "bulkCargo": [
+        {
+          "type": "Direct Reduced Iron",
+          "hold": "Hold 2",
+          "weight": 25000,
+          "weightUnit": "MT",
+          "imsbcSchedule": "DRI (B) - Pending amendment"
+        }
+      ],
+      "incidents": ["INC-908-2024-007"],
+      "portStateInspections": 1,
+      "deficiencies": 1,
+      "deficiencyDetails": "IMSBC schedule mismatch"
+    },
+    {
+      "voyageNumber": "ECL-2024-092E",
+      "date": "2024-12-18",
+      "route": "Melbourne - Singapore - Rotterdam",
+      "totalContainers": 6456,
+      "totalTEU": 7890,
+      "totalWeight": 74200,
+      "weightUnit": "MT",
+      "dangerousGoods": 189,
+      "reeferContainers": 380,
+      "specialCargo": [
+        {
+          "type": "Heavy Machinery",
+          "description": "Mining equipment",
+          "bays": [28],
+          "weight": 850,
+          "weightUnit": "MT",
+          "securingMethod": "Lashing software calculated"
+        }
+      ],
+      "incidents": ["INC-908-2024-008"],
+      "portStateInspections": 0,
+      "deficiencies": 0
+    },
+    {
+      "voyageNumber": "ECL-2025-008W",
+      "date": "2025-01-22",
+      "route": "Rotterdam - Antwerp - New York",
+      "totalContainers": 5234,
+      "totalTEU": 6456,
+      "totalWeight": 62300,
+      "weightUnit": "MT",
+      "dangerousGoods": 267,
+      "reeferContainers": 290,
+      "incidents": ["INC-908-2025-001"],
+      "portStateInspections": 1,
+      "deficiencies": 1,
+      "deficiencyDetails": "IMDG Column 17 information missing"
+    },
+    {
+      "voyageNumber": "ECL-2025-015E",
+      "date": "2025-02-14",
+      "route": "New York - Hamburg - Shanghai",
+      "totalContainers": 6789,
+      "totalTEU": 8123,
+      "totalWeight": 78900,
+      "weightUnit": "MT",
+      "dangerousGoods": 198,
+      "reeferContainers": 320,
+      "incidents": ["INC-908-2025-002"],
+      "portStateInspections": 1,
+      "deficiencies": 0
+    },
+    {
+      "voyageNumber": "ECL-2025-023W",
+      "date": "2025-03-30",
+      "route": "Shanghai - Algeciras - Rotterdam",
+      "totalContainers": 7123,
+      "totalTEU": 8567,
+      "totalWeight": 81200,
+      "weightUnit": "MT",
+      "dangerousGoods": 212,
+      "reeferContainers": 345,
+      "fumigatedCargo": [
+        {
+          "containerNumber": "CSLU7654321",
+          "commodity": "Leather goods",
+          "fumigant": "Phosphine",
+          "fumigationDate": "2025-03-28"
+        }
+      ],
+      "incidents": ["INC-908-2025-003"],
+      "portStateInspections": 1,
+      "deficiencies": 0
+    },
+    {
+      "voyageNumber": "ECL-2025-031E",
+      "date": "2025-05-12",
+      "route": "Rotterdam - Piraeus - Shanghai",
+      "totalContainers": 6234,
+      "totalTEU": 7567,
+      "totalWeight": 72800,
+      "weightUnit": "MT",
+      "dangerousGoods": 167,
+      "reeferContainers": 298,
+      "incidents": ["INC-908-2025-004"],
+      "portStateInspections": 1,
+      "deficiencies": 1,
+      "deficiencyDetails": "Lifeboat release mechanism"
+    },
+    {
+      "voyageNumber": "ECL-2025-038W",
+      "date": "2025-06-28",
+      "route": "Shanghai - Piraeus - Hamburg",
+      "totalContainers": 5890,
+      "totalTEU": 7123,
+      "totalWeight": 68500,
+      "weightUnit": "MT",
+      "dangerousGoods": 145,
+      "reeferContainers": 267,
+      "bulkCargo": [
+        {
+          "type": "Fish Meal",
+          "hold": "Hold 4",
+          "weight": 18000,
+          "weightUnit": "MT",
+          "antioxidant": "BHT - Status undeclared",
+          "imsbcSchedule": "FISH MEAL (FISH SCRAP), STABILIZED"
+        }
+      ],
+      "incidents": ["INC-908-2025-005"],
+      "portStateInspections": 1,
+      "deficiencies": 2,
+      "deficiencyDetails": "Fish meal self-heating; IMSBC non-compliance"
+    },
+    {
+      "voyageNumber": "ECL-2025-046E",
+      "date": "2025-08-05",
+      "route": "Hamburg - Jeddah - Singapore",
+      "totalContainers": 6456,
+      "totalTEU": 7890,
+      "totalWeight": 75600,
+      "weightUnit": "MT",
+      "dangerousGoods": 178,
+      "reeferContainers": 312,
+      "incidents": ["INC-908-2025-006"],
+      "portStateInspections": 1,
+      "deficiencies": 1,
+      "deficiencyDetails": "Mechanical pilot hoist in use"
+    },
+    {
+      "voyageNumber": "ECL-2025-053W",
+      "date": "2025-09-19",
+      "route": "Singapore - Suez - Rotterdam",
+      "totalContainers": 7234,
+      "totalTEU": 8678,
+      "totalWeight": 83400,
+      "weightUnit": "MT",
+      "dangerousGoods": 234,
+      "reeferContainers": 289,
+      "securityLevel": "ISPS Level 2",
+      "armedSecurity": true,
+      "incidents": ["INC-908-2025-007"],
+      "portStateInspections": 0,
+      "deficiencies": 0
+    },
+    {
+      "voyageNumber": "ECL-2025-061E",
+      "date": "2025-10-25",
+      "route": "Rotterdam - Shanghai - Los Angeles",
+      "totalContainers": 6123,
+      "totalTEU": 7456,
+      "totalWeight": 71800,
+      "weightUnit": "MT",
+      "dangerousGoods": 189,
+      "reeferContainers": 334,
+      "incidents": ["INC-908-2025-008"],
+      "portStateInspections": 1,
+      "deficiencies": 0
+    },
+    {
+      "voyageNumber": "ECL-2025-068W",
+      "date": "2025-11-30",
+      "route": "Los Angeles - Shanghai - Rotterdam",
+      "totalContainers": 5678,
+      "totalTEU": 6890,
+      "totalWeight": 66200,
+      "weightUnit": "MT",
+      "dangerousGoods": 298,
+      "reeferContainers": 267,
+      "dangerousGoodsIncident": [
+        {
+          "containerNumber": "MSCU3456789",
+          "imoClass": "Class 9",
+          "unNumber": "UN3480",
+          "properShippingName": "Lithium ion batteries",
+          "issue": "Improper packaging; thermal runaway signs"
+        }
+      ],
+      "incidents": ["INC-908-2025-009"],
+      "portStateInspections": 1,
+      "deficiencies": 1,
+      "deficiencyDetails": "Lithium battery packaging non-compliance"
+    },
+    {
+      "voyageNumber": "ECL-2026-005E",
+      "date": "2026-01-15",
+      "route": "Shanghai - Felixstowe - Hamburg",
+      "totalContainers": 6890,
+      "totalTEU": 8234,
+      "totalWeight": 79100,
+      "weightUnit": "MT",
+      "dangerousGoods": 212,
+      "reeferContainers": 345,
+      "bulkCargo": [
+        {
+          "type": "Zinc Slag",
+          "hold": "Hold 5",
+          "weight": 12000,
+          "weightUnit": "MT",
+          "imsbcSchedule": "ZINC SLAG (coarse) - New 08-25 schedule"
+        }
+      ],
+      "incidents": ["INC-908-2026-001"],
+      "portStateInspections": 1,
+      "deficiencies": 0
+    },
+    {
+      "voyageNumber": "ECL-2026-012W",
+      "date": "2026-02-08",
+      "route": "Hamburg - Valencia - Santos",
+      "totalContainers": 5456,
+      "totalTEU": 6678,
+      "totalWeight": 64500,
+      "weightUnit": "MT",
+      "dangerousGoods": 156,
+      "reeferContainers": 389,
+      "incidents": ["INC-908-2026-002"],
+      "portStateInspections": 1,
+      "deficiencies": 1,
+      "deficiencyDetails": "Gas monitor calibration expired"
+    }
+  ],
+  "summary": {
+    "totalVoyages": 19,
+    "totalIncidents": 20,
+    "incidentsByCategory": {
+      "Cargo Securing": 6,
+      "Dangerous Goods": 4,
+      "Fumigation Safety": 2,
+      "Cargo Declaration": 4,
+      "Enclosed Space Entry": 2,
+      "Pilot Transfer": 2,
+      "Emergency Equipment": 1,
+      "Security": 1,
+      "Navigation": 1
+    },
+    "incidentsBySeverity": {
+      "Minor": 7,
+      "Moderate": 9,
+      "Serious": 4
+    },
+    "totalMaintenanceCost": 992500,
+    "currency": "EUR",
+    "portStateInspections": 21,
+    "totalDeficiencies": 17,
+    "detentions": 0,
+    "complianceRate": 91.8,
+    "keyTrends": [
+      "Lashing equipment failures concentrated in heavy weather transits",
+      "Fumigation incidents related to phosphine gas and sealing issues",
+      "Dangerous goods declaration errors increasing with new IMDG requirements",
+      "IMSBC Code amendment transition causing documentation issues",
+      "Pilot transfer arrangements required major upgrade for SOLAS V/23 compliance",
+      "Life-saving appliance maintenance costs increased due to new MSC circular requirements"
+    ],
+    "recommendations": [
+      "Implement quarterly lashing equipment inspection cycle",
+      "Enhance fumigation contractor vetting and seal verification procedures",
+      "Mandatory DG documentation training for all loading ports",
+      "IMSBC Code 08-25 amendment awareness program for shippers",
+      "Complete pilot transfer arrangement upgrades fleet-wide",
+      "Implement gas monitor calibration tracking system"
+    ]
+  }
+}

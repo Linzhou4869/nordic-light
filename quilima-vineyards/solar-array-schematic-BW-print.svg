@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <!-- High-Contrast Solar Panel Pattern (B&W) -->
+    <pattern id="solarPanelBW" x="0" y="0" width="40" height="60" patternUnits="userSpaceOnUse">
+      <rect width="40" height="60" fill="#000000"/>
+      <rect x="2" y="2" width="36" height="56" fill="#333333"/>
+      <line x1="2" y1="20" x2="38" y2="20" stroke="#666666" stroke-width="1"/>
+      <line x1="2" y1="40" x2="38" y2="40" stroke="#666666" stroke-width="1"/>
+    </pattern>
+    
+    <!-- Water Pattern (B&W) -->
+    <pattern id="waterPatternBW" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M0 10 Q5 5 10 10 T20 10" stroke="#000000" stroke-width="2" fill="none"/>
+    </pattern>
+    
+    <!-- Crosshatch Pattern for Inverter -->
+    <pattern id="crosshatch" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="8" y2="8" stroke="#000000" stroke-width="1"/>
+      <line x1="8" y1="0" x2="0" y2="8" stroke="#000000" stroke-width="1"/>
+    </pattern>
+    
+    <!-- Dotted Pattern for Junction Box -->
+    <pattern id="dotPattern" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="2" fill="#000000"/>
+    </pattern>
+    
+    <!-- Arrow marker (black) -->
+    <marker id="flowArrowBW" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#000000"/>
+    </marker>
+  </defs>
+  
+  <!-- Background - White for printing -->
+  <rect width="1200" height="800" fill="#ffffff"/>
+  
+  <!-- Title Block - High Contrast Black -->
+  <rect x="50" y="30" width="1100" height="60" fill="#000000" rx="5"/>
+  <text x="600" y="55" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">QUILIMA VINEYARDS - SOLAR ARRAY TECHNICAL SCHEMATIC</text>
+  <text x="600" y="75" font-family="Arial, sans-serif" font-size="14" fill="#cccccc" text-anchor="middle">4kW Solar Installation | Sector B | Client Review 2026-03-29</text>
+  
+  <!-- Site Boundary - Thick black dashed -->
+  <rect x="100" y="120" width="1000" height="600" fill="none" stroke="#000000" stroke-width="3" stroke-dasharray="10,5"/>
+  <text x="1050" y="140" font-family="Arial, sans-serif" font-size="12" fill="#000000" font-weight="bold">Property Boundary</text>
+  
+  <!-- Sector Labels - All black, bold -->
+  <text x="200" y="180" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">Sector A</text>
+  <text x="700" y="180" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">Sector B</text>
+  <text x="950" y="400" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">Sector C</text>
+  
+  <!-- Solar Array (4kW) near Sector B -->
+  <g transform="translate(550, 220)">
+    <rect x="0" y="0" width="280" height="180" fill="#ffffff" stroke="#000000" stroke-width="3" rx="5"/>
+    <text x="140" y="-15" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000" text-anchor="middle">4kW SOLAR ARRAY</text>
+    
+    <!-- Solar Panels Grid (10 panels x 400W each = 4kW) - High contrast -->
+    <rect x="10" y="10" width="120" height="75" fill="url(#solarPanelBW)" stroke="#000000" stroke-width="2"/>
+    <rect x="140" y="10" width="120" height="75" fill="url(#solarPanelBW)" stroke="#000000" stroke-width="2"/>
+    <rect x="10" y="95" width="120" height="75" fill="url(#solarPanelBW)" stroke="#000000" stroke-width="2"/>
+    <rect x="140" y="95" width="120" height="75" fill="url(#solarPanelBW)" stroke="#000000" stroke-width="2"/>
+    
+    <!-- Panel Labels - White on black background -->
+    <rect x="55" y="45" width="30" height="20" fill="#000000"/>
+    <text x="70" y="58" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="bold">400W</text>
+    <rect x="185" y="45" width="30" height="20" fill="#000000"/>
+    <text x="200" y="58" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="bold">400W</text>
+    <rect x="55" y="130" width="30" height="20" fill="#000000"/>
+    <text x="70" y="143" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="bold">400W</text>
+    <rect x="185" y="130" width="30" height="20" fill="#000000"/>
+    <text x="200" y="143" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="bold">400W</text>
+    
+    <!-- Inverter Box - Crosshatch pattern for distinction -->
+    <rect x="250" y="60" width="50" height="60" fill="url(#crosshatch)" stroke="#000000" stroke-width="3" rx="3"/>
+    <rect x="252" y="62" width="46" height="56" fill="#ffffff"/>
+    <text x="275" y="82" font-family="Arial, sans-serif" font-size="9" fill="#000000" text-anchor="middle" font-weight="bold">DC/AC</text>
+    <text x="275" y="97" font-family="Arial, sans-serif" font-size="9" fill="#000000" text-anchor="middle" font-weight="bold">Inverter</text>
+  </g>
+  
+  <!-- Solar Array Specifications Box -->
+  <g transform="translate(550, 430)">
+    <rect x="0" y="0" width="280" height="100" fill="#ffffff" stroke="#000000" stroke-width="2" rx="5"/>
+    <text x="140" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle">SPECIFICATIONS</text>
+    <text x="10" y="40" font-family="Arial, sans-serif" font-size="11" fill="#000000" font-weight="bold">Total Capacity: 4.0 kW</text>
+    <text x="10" y="58" font-family="Arial, sans-serif" font-size="11" fill="#000000">Panels: 10 × 400W Monocrystalline</text>
+    <text x="10" y="76" font-family="Arial, sans-serif" font-size="11" fill="#000000">Inverter: 4.5kW DC/AC</text>
+    <text x="150" y="40" font-family="Arial, sans-serif" font-size="11" fill="#000000" font-weight="bold">Est. Output: 16-20 kWh/day</text>
+    <text x="150" y="58" font-family="Arial, sans-serif" font-size="11" fill="#000000">Mounting: Ground-fixed, 30° tilt</text>
+    <text x="150" y="76" font-family="Arial, sans-serif" font-size="11" fill="#000000">Area: ~25 m²</text>
+  </g>
+  
+  <!-- Main Reservoir -->
+  <g transform="translate(150, 450)">
+    <!-- Reservoir Tank - High contrast water pattern -->
+    <ellipse cx="150" cy="100" rx="150" ry="50" fill="url(#waterPatternBW)" stroke="#000000" stroke-width="4"/>
+    <rect x="0" y="50" width="300" height="100" fill="url(#waterPatternBW)" stroke="#000000" stroke-width="4"/>
+    <ellipse cx="150" cy="150" rx="150" ry="50" fill="#666666" stroke="#000000" stroke-width="4"/>
+    
+    <!-- Reservoir Label -->
+    <text x="150" y="90" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">MAIN RESERVOIR</text>
+    <text x="150" y="110" font-family="Arial, sans-serif" font-size="12" fill="#000000" text-anchor="middle" font-weight="bold">Capacity: 50,000 L</text>
+    
+    <!-- Water Level Indicator -->
+    <rect x="280" y="60" width="20" height="80" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+    <rect x="282" y="80" width="16" height="40" fill="#333333"/>
+    <text x="290" y="150" font-family="Arial, sans-serif" font-size="10" fill="#000000" text-anchor="middle" font-weight="bold">Level</text>
+  </g>
+  
+  <!-- Piping Route (Proposed) - Thick black with dashed flow indicator -->
+  <g>
+    <!-- Main pipe from solar array to reservoir - thick black -->
+    <path d="M 690 400 L 690 480 L 450 480 L 450 500" 
+          fill="none" stroke="#000000" stroke-width="10" stroke-linecap="round"/>
+    <!-- Flow direction indicator - dashed white overlay -->
+    <path d="M 690 400 L 690 480 L 450 480 L 450 500" 
+          fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="10,10" stroke-linecap="round"/>
+    <!-- Flow arrow -->
+    <path d="M 450 485 L 450 500" 
+          fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" 
+          marker-end="url(#flowArrowBW)"/>
+    
+    <!-- Pipe labels - bold black -->
+    <rect x="695" y="435" width="100" height="20" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+    <text x="745" y="449" font-family="Arial, sans-serif" font-size="11" fill="#000000" font-weight="bold" text-anchor="middle">PVC Schedule 40</text>
+    <rect x="695" y="455" width="80" height="18" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+    <text x="735" y="468" font-family="Arial, sans-serif" font-size="11" fill="#000000" text-anchor="middle">Ø 50mm (2")</text>
+    
+    <!-- Junction Box at Solar Array - Dot pattern -->
+    <circle cx="690" cy="400" r="15" fill="url(#dotPattern)" stroke="#000000" stroke-width="3"/>
+    <circle cx="690" cy="400" r="12" fill="#ffffff"/>
+    <text x="690" y="405" font-family="Arial, sans-serif" font-size="10" fill="#000000" text-anchor="middle" font-weight="bold">JB-1</text>
+  </g>
+  
+  <!-- Pump Station -->
+  <g transform="translate(420, 500)">
+    <rect x="0" y="0" width="60" height="50" fill="#ffffff" stroke="#000000" stroke-width="3" rx="5"/>
+    <circle cx="30" cy="25" r="15" fill="#333333" stroke="#000000" stroke-width="2"/>
+    <text x="30" y="30" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="bold">PUMP</text>
+    <text x="30" y="-10" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">PUMP STATION</text>
+  </g>
+  
+  <!-- Distance Markers - Bold black -->
+  <g>
+    <line x1="550" y1="200" x2="550" y2="190" stroke="#000000" stroke-width="2"/>
+    <line x1="830" y1="200" x2="830" y2="190" stroke="#000000" stroke-width="2"/>
+    <line x1="550" y1="195" x2="830" y2="195" stroke="#000000" stroke-width="2"/>
+    <text x="690" y="185" font-family="Arial, sans-serif" font-size="11" fill="#000000" text-anchor="middle" font-weight="bold">~280m</text>
+    
+    <line x1="690" y1="400" x2="690" y2="480" stroke="#000000" stroke-width="1"/>
+    <line x1="700" y1="400" x2="700" y2="480" stroke="#000000" stroke-width="1"/>
+    <line x1="695" y1="400" x2="700" y2="400" stroke="#000000" stroke-width="1"/>
+    <line x1="695" y1="480" x2="700" y2="480" stroke="#000000" stroke-width="1"/>
+    <text x="710" y="445" font-family="Arial, sans-serif" font-size="10" fill="#000000" font-weight="bold">~80m</text>
+  </g>
+  
+  <!-- Legend - High contrast -->
+  <g transform="translate(900, 500)">
+    <rect x="0" y="0" width="250" height="180" fill="#ffffff" stroke="#000000" stroke-width="2" rx="5"/>
+    <text x="125" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000" text-anchor="middle">LEGEND</text>
+    
+    <rect x="15" y="40" width="30" height="20" fill="url(#solarPanelBW)" stroke="#000000" stroke-width="1"/>
+    <text x="55" y="55" font-family="Arial, sans-serif" font-size="11" fill="#000000" font-weight="bold">Solar Panel (400W)</text>
+    
+    <rect x="15" y="70" width="30" height="20" fill="url(#crosshatch)" stroke="#000000" stroke-width="1"/>
+    <text x="55" y="85" font-family="Arial, sans-serif" font-size="11" fill="#000000" font-weight="bold">Inverter</text>
+    
+    <line x1="15" y1="105" x2="45" y2="105" stroke="#000000" stroke-width="8"/>
+    <text x="55" y="110" font-family="Arial, sans-serif" font-size="11" fill="#000000" font-weight="bold">Piping Route (Proposed)</text>
+    
+    <circle cx="30" cy="135" r="8" fill="url(#dotPattern)" stroke="#000000" stroke-width="2"/>
+    <text x="55" y="140" font-family="Arial, sans-serif" font-size="11" fill="#000000" font-weight="bold">Junction Box</text>
+    
+    <rect x="15" y="150" width="30" height="20" fill="#333333" stroke="#000000" stroke-width="1"/>
+    <text x="55" y="165" font-family="Arial, sans-serif" font-size="11" fill="#000000" font-weight="bold">Pump Station</text>
+    
+    <ellipse cx="30" cy="180" rx="15" ry="8" fill="url(#waterPatternBW)" stroke="#000000" stroke-width="1"/>
+    <text x="55" y="185" font-family="Arial, sans-serif" font-size="11" fill="#000000" font-weight="bold">Reservoir</text>
+  </g>
+  
+  <!-- North Arrow - Bold black -->
+  <g transform="translate(1050, 150)">
+    <line x1="0" y1="40" x2="0" y2="0" stroke="#000000" stroke-width="4"/>
+    <polygon points="-8,10 0,0 8,10" fill="#000000"/>
+    <text x="0" y="-10" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000" text-anchor="middle">N</text>
+  </g>
+  
+  <!-- Scale Bar - High contrast -->
+  <g transform="translate(100, 700)">
+    <line x1="0" y1="0" x2="200" y2="0" stroke="#000000" stroke-width="4"/>
+    <line x1="0" y1="-5" x2="0" y2="5" stroke="#000000" stroke-width="3"/>
+    <line x1="100" y1="-5" x2="100" y2="5" stroke="#000000" stroke-width="3"/>
+    <line x1="200" y1="-5" x2="200" y2="5" stroke="#000000" stroke-width="3"/>
+    <text x="0" y="20" font-family="Arial, sans-serif" font-size="11" fill="#000000" font-weight="bold">0m</text>
+    <text x="100" y="20" font-family="Arial, sans-serif" font-size="11" fill="#000000" text-anchor="middle" font-weight="bold">50m</text>
+    <text x="200" y="20" font-family="Arial, sans-serif" font-size="11" fill="#000000" text-anchor="end" font-weight="bold">100m</text>
+    <text x="100" y="40" font-family="Arial, sans-serif" font-size="11" fill="#000000" text-anchor="middle">Not to scale</text>
+  </g>
+  
+  <!-- Notes Section -->
+  <g transform="translate(100, 580)">
+    <rect x="0" y="0" width="400" height="100" fill="#ffffff" stroke="#000000" stroke-width="2" rx="5"/>
+    <text x="10" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000">INSTALLATION NOTES:</text>
+    <text x="10" y="40" font-family="Arial, sans-serif" font-size="10" fill="#000000">1. Solar array positioned 15m from Sector B vineyard rows</text>
+    <text x="10" y="55" font-family="Arial, sans-serif" font-size="10" fill="#000000">2. Piping route avoids existing irrigation infrastructure</text>
+    <text x="10" y="70" font-family="Arial, sans-serif" font-size="10" fill="#000000">3. Pump station requires 220V AC connection from inverter</text>
+    <text x="10" y="85" font-family="Arial, sans-serif" font-size="10" fill="#000000">4. All buried piping at 600mm depth (frost line protection)</text>
+  </g>
+  
+  <!-- Revision Block -->
+  <g transform="translate(900, 700)">
+    <rect x="0" y="0" width="250" height="80" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+    <text x="10" y="18" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">REVISION HISTORY:</text>
+    <text x="10" y="35" font-family="Arial, sans-serif" font-size="9" fill="#000000">Rev B | 2026-03-29 | B&W print-optimized version</text>
+    <text x="10" y="50" font-family="Arial, sans-serif" font-size="9" fill="#000000">Prepared by: OpenClaw Engineering</text>
+    <text x="10" y="65" font-family="Arial, sans-serif" font-size="9" fill="#000000">Status: FINAL_SITE_PRINT</text>
+  </g>
+  
+  <!-- Print Optimization Metadata -->
+  <metadata>
+    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about="">
+        <dc:title xmlns:dc="http://purl.org/dc/elements/1.1/">Quilima Vineyards Solar Array - B&W Print Version</dc:title>
+        <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">OpenClaw Engineering</dc:creator>
+        <dc:date xmlns:dc="http://purl.org/dc/elements/1.1/">2026-03-29</dc:date>
+        <dc:subject xmlns:dc="http://purl.org/dc/elements/1.1/">Solar Array, Technical Schematic, B&W Print</dc:subject>
+        <dc:description xmlns:dc="http://purl.org/dc/elements/1.1/">High-contrast black and white schematic optimized for printing</dc:description>
+        <xmp:Tag xmlns:xmp="http://ns.adobe.com/xap/1.0/">Final_Site_Print</xmp:Tag>
+        <xmp:Project xmlns:xmp="http://ns.adobe.com/xap/1.0/">Quilima Vineyard - Drought Mitigation Phase 2</xmp:Project>
+      </rdf:Description>
+    </rdf:RDF>
+  </metadata>
+</svg>
