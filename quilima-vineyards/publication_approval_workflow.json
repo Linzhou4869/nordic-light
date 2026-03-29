@@ -1,0 +1,260 @@
+{
+  "workflow_id": "quilima-vineyard-soil-analysis-publication-approval",
+  "workflow_name": "Soil Analysis Manuscript Publication Approval",
+  "version": "1.0.0",
+  "created_date": "2026-03-29T13:50:00+08:00",
+  "status": "active",
+  "description": "Approval workflow gate for publication of soil nitrogen analysis manuscript from Quilima Vineyards Drought Mitigation Phase 2 research program",
+  
+  "document_metadata": {
+    "manuscript_title": "Soil Nitrogen Dynamics in Organic Grain Rotation Systems: A Multi-Zone Analysis Across Two Harvest Cycles",
+    "manuscript_path": "quilima-vineyards/soil_analysis_manuscript.md",
+    "document_type": "scientific_manuscript",
+    "research_program": "Quilima Vineyards Drought Mitigation Phase 2",
+    "study_type": "soil_analysis",
+    "compliance_standard": "ASA-CSSA-SSSA"
+  },
+
+  "approval_gates": [
+    {
+      "gate_id": "gate-001",
+      "gate_name": "Lead Agronomist Verification",
+      "gate_type": "technical_review",
+      "priority": 1,
+      "required": true,
+      "blocking": true,
+      "description": "Mandatory technical verification of soil analysis methodology, data interpretation, and agricultural conclusions by qualified Lead Agronomist",
+      
+      "approver_role": {
+        "title": "Lead Agronomist",
+        "required_credentials": [
+          "Certified Crop Adviser (CCA)",
+          "M.S. or Ph.D. in Agronomy, Soil Science, or related field",
+          "Minimum 5 years experience in organic agricultural systems"
+        ],
+        "department": "Agricultural Research & Development",
+        "authority_level": "technical_sign_off"
+      },
+      
+      "review_criteria": [
+        {
+          "criterion_id": "TC-001",
+          "criterion": "Methodology Validation",
+          "description": "Verify soil sampling protocol, laboratory analysis methods, and statistical approaches meet scientific standards",
+          "required": true
+        },
+        {
+          "criterion_id": "TC-002",
+          "criterion": "Data Accuracy",
+          "description": "Confirm nitrogen concentration values, statistical calculations, and compliance analysis are accurate and reproducible",
+          "required": true
+        },
+        {
+          "criterion_id": "TC-003",
+          "criterion": "Interpretation Validity",
+          "description": "Assess whether conclusions drawn from data are scientifically supported and appropriately qualified",
+          "required": true
+        },
+        {
+          "criterion_id": "TC-004",
+          "criterion": "Compliance Verification",
+          "description": "Verify manuscript adheres to ASA-CSSA-SSSA agricultural reporting standards",
+          "required": true
+        },
+        {
+          "criterion_id": "TC-005",
+          "criterion": "Visualization Review",
+          "description": "Approve accuracy and clarity of figures, tables, and data visualizations",
+          "required": true
+        }
+      ],
+      
+      "approval_actions": {
+        "approve": {
+          "action": "proceed_to_next_gate",
+          "requires_signature": true,
+          "requires_date": true,
+          "requires_comments": false
+        },
+        "approve_with_conditions": {
+          "action": "conditional_approval",
+          "requires_signature": true,
+          "requires_date": true,
+          "requires_comments": true,
+          "condition_resolution_required": true
+        },
+        "reject": {
+          "action": "return_for_revision",
+          "requires_signature": true,
+          "requires_date": true,
+          "requires_comments": true,
+          "revision_tracking": true
+        }
+      },
+      
+      "sla": {
+        "review_period_days": 5,
+        "escalation_after_days": 7,
+        "escalation_contact": "Research Program Director"
+      }
+    },
+    
+    {
+      "gate_id": "gate-002",
+      "gate_name": "Research Director Authorization",
+      "gate_type": "administrative_approval",
+      "priority": 2,
+      "required": true,
+      "blocking": true,
+      "description": "Final administrative authorization for publication release",
+      "depends_on": ["gate-001"],
+      
+      "approver_role": {
+        "title": "Research Program Director",
+        "department": "Agricultural Research & Development",
+        "authority_level": "publication_authorization"
+      },
+      
+      "review_criteria": [
+        {
+          "criterion_id": "AC-001",
+          "criterion": "Gate 1 Completion",
+          "description": "Confirm Lead Agronomist approval has been obtained",
+          "required": true
+        },
+        {
+          "criterion_id": "AC-002",
+          "criterion": "Publication Readiness",
+          "description": "Verify manuscript is complete and ready for external distribution",
+          "required": true
+        },
+        {
+          "criterion_id": "AC-003",
+          "criterion": "Stakeholder Review",
+          "description": "Confirm relevant stakeholders have been consulted",
+          "required": false
+        }
+      ],
+      
+      "approval_actions": {
+        "approve": {
+          "action": "authorize_publication",
+          "requires_signature": true,
+          "requires_date": true
+        },
+        "reject": {
+          "action": "return_for_revision",
+          "requires_signature": true,
+          "requires_date": true,
+          "requires_comments": true
+        }
+      },
+      
+      "sla": {
+        "review_period_days": 3,
+        "escalation_after_days": 5,
+        "escalation_contact": "Executive Director"
+      }
+    }
+  ],
+
+  "workflow_state": {
+    "current_state": "pending_gate_001",
+    "current_gate": "gate-001",
+    "approval_status": "awaiting_review",
+    "initiated_date": "2026-03-29T13:50:00+08:00",
+    "initiated_by": "OpenClaw Agricultural Research Team",
+    "completion_date": null,
+    "history": []
+  },
+
+  "notifications": {
+    "on_gate_assignment": {
+      "enabled": true,
+      "recipients": ["approver"],
+      "channels": ["email"]
+    },
+    "on_approval": {
+      "enabled": true,
+      "recipients": ["requester", "next_approver"],
+      "channels": ["email"]
+    },
+    "on_rejection": {
+      "enabled": true,
+      "recipients": ["requester", "project_team"],
+      "channels": ["email"]
+    },
+    "on_sla_breach": {
+      "enabled": true,
+      "recipients": ["approver", "escalation_contact"],
+      "channels": ["email", "system_alert"]
+    }
+  },
+
+  "audit_trail": {
+    "enabled": true,
+    "log_all_actions": true,
+    "require_comments_for_rejection": true,
+    "retention_period_years": 7
+  },
+
+  "publication_restrictions": {
+    "pre_approval": {
+      "external_distribution": false,
+      "public_release": false,
+      "media_contact": false,
+      "conference_presentation": false
+    },
+    "post_approval": {
+      "external_distribution": true,
+      "public_release": true,
+      "media_contact": "with_approval",
+      "conference_presentation": true
+    }
+  },
+
+  "associated_artifacts": [
+    {
+      "artifact_id": "art-001",
+      "name": "Manuscript",
+      "path": "quilima-vineyards/soil_analysis_manuscript.md",
+      "type": "document",
+      "required": true
+    },
+    {
+      "artifact_id": "art-002",
+      "name": "Nitrogen-Yield Visualization",
+      "path": "quilima-vineyards/nitrogen_yield_relationship.png",
+      "type": "figure",
+      "required": true
+    },
+    {
+      "artifact_id": "art-003",
+      "name": "Nitrogen-Yield Visualization (PDF)",
+      "path": "quilima-vineyards/nitrogen_yield_relationship.pdf",
+      "type": "figure",
+      "required": true
+    },
+    {
+      "artifact_id": "art-004",
+      "name": "Technical Specifications",
+      "path": "quilima-vineyards/solar-array-technical-specs.md",
+      "type": "reference",
+      "required": false
+    },
+    {
+      "artifact_id": "art-005",
+      "name": "Metadata Manifest",
+      "path": "quilima-vineyards/METADATA_MANIFEST.md",
+      "type": "reference",
+      "required": false
+    }
+  ],
+
+  "metadata": {
+    "workflow_engine": "openclaw-approval-system",
+    "schema_version": "2.0",
+    "last_modified": "2026-03-29T13:50:00+08:00",
+    "last_modified_by": "OpenClaw Agricultural Research Team"
+  }
+}
